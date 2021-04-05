@@ -1,9 +1,9 @@
-import { Model, Optional } from 'sequelize';
+import { Model, Optional, DataTypes } from 'sequelize';
 import Session from './Session';
 import { sequelize } from '.';
 
 interface UserAttributes {
-	id: number;
+	id?: number;
 	firstName: string;
 	lastName: string;
 	email: string;
