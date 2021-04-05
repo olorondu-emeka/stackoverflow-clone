@@ -1,10 +1,4 @@
-import { response, Response } from 'express';
-
-interface ResponseObject {
-  message: string;
-  status: string;
-  data: null;
-}
+import { FinalResponse, ResponseObject } from 'core/definitions/CommonTypes';
 
 /**
  * @class ErrorResponse
@@ -29,9 +23,12 @@ export default class ErrorResponse {
    * @param {string} message expected message
    * @returns {Response} express response object
    */
-  public static serverError(message: string): Response {
+  public static serverError(message: string): FinalResponse {
     const responseObject = this.getResponseObject(message);
-    return response.status(500).json(responseObject);
+    return {
+      statusCode: 500,
+      data: responseObject
+    };
   }
 
   /**
@@ -39,9 +36,12 @@ export default class ErrorResponse {
    * @param {string} message expected message
    * @returns {Response} express response object
    */
-  public static unauthorized(message: string): Response {
+  public static unauthorized(message: string): FinalResponse {
     const responseObject = this.getResponseObject(message);
-    return response.status(401).json(responseObject);
+    return {
+      statusCode: 401,
+      data: responseObject
+    };
   }
 
   /**
@@ -49,9 +49,12 @@ export default class ErrorResponse {
    * @param {string} message expected message
    * @returns {Response} express response object
    */
-  public static forbidden(message: string): Response {
+  public static forbidden(message: string): FinalResponse {
     const responseObject = this.getResponseObject(message);
-    return response.status(403).json(responseObject);
+    return {
+      statusCode: 403,
+      data: responseObject
+    };
   }
 
   /**
@@ -59,9 +62,12 @@ export default class ErrorResponse {
    * @param {string} message expected message
    * @returns {Response} express response object
    */
-  public static badRequest(message: string): Response {
+  public static badRequest(message: string): FinalResponse {
     const responseObject = this.getResponseObject(message);
-    return response.status(400).json(responseObject);
+    return {
+      statusCode: 400,
+      data: responseObject
+    };
   }
 
   /**
@@ -69,8 +75,11 @@ export default class ErrorResponse {
    * @param {string} message expected message
    * @returns {Response} express response object
    */
-  public static conflict(message: string): Response {
+  public static conflict(message: string): FinalResponse {
     const responseObject = this.getResponseObject(message);
-    return response.status(409).json(responseObject);
+    return {
+      statusCode: 409,
+      data: responseObject
+    };
   }
 }

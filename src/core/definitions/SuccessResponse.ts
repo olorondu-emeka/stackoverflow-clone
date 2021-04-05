@@ -1,14 +1,8 @@
-import { response, Response } from 'express';
-
-interface DataObject {
-  [index: string]: string | number | boolean;
-}
-
-interface ResponseObject {
-  message: string;
-  status: string;
-  data: DataObject | null;
-}
+import {
+  DataObject,
+  FinalResponse,
+  ResponseObject
+} from 'core/definitions/CommonTypes';
 
 /**
  * @class SuccessResponse
@@ -35,21 +29,27 @@ export default class SuccessResponse {
    *
    * @param {string} message expected message
    * @param {DataObject} data expected data object
-   * @returns {Response} express response object
+   * @returns {FinalResponse} express response object
    */
-  public static ok(message: string, data: DataObject): Response {
+  public static ok(message: string, data: DataObject): FinalResponse {
     const responseObject = this.getResponseObject(message, data);
-    return response.status(200).json(responseObject);
+    return {
+      statusCode: 200,
+      data: responseObject
+    };
   }
 
   /**
    *
    * @param {string} message expected message
    * @param {DataObject} data expected data object
-   * @returns {Response} express response object
+   * @returns {FinalResponse} express response object
    */
-  public static created(message: string, data: DataObject): Response {
+  public static created(message: string, data: DataObject): FinalResponse {
     const responseObject = this.getResponseObject(message, data);
-    return response.status(201).json(responseObject);
+    return {
+      statusCode: 201,
+      data: responseObject
+    };
   }
 }
