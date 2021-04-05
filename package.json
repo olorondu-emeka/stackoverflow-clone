@@ -4,15 +4,16 @@
 	"description": "stack overflow REST API clone",
 	"main": "index.ts",
 	"scripts": {
-		"test": "jest",
-		"coverage": "jest --coverage",
 		"start": " npm run build && npm run start:prod",
 		"start:dev": "nodemon",
 		"start:prod": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
 		"build": "npm run lint && npm run clean && tsc",
 		"clean": "rimraf dist",
+		"test": "jest",
+		"coverage": "jest --coverage",
 		"lint": "eslint . --ext .ts",
-		"lint:fix": "eslint . --ext .ts --fix"
+		"lint:fix": "eslint . --ext .ts --fix",
+		"syncenv": "node envcheck.js"
 	},
 	"repository": {
 		"type": "git",
@@ -53,7 +54,7 @@
 		}
 	},
 	"lint-staged": {
-		"*.+(ts)": [
+		"*.+(ts|js)": [
 			"eslint --fix --ext .ts ./src",
 			"git add"
 		],
