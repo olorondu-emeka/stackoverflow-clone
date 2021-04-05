@@ -40,3 +40,5 @@ const User = sequelize.define<UserInstance>('User', {
 User.hasMany(Session, {
   foreignKey: 'userId'
 });
+
+export default User;

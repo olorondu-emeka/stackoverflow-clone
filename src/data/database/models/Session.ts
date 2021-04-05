@@ -38,3 +38,5 @@ Session.belongsTo(User, {
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE'
 });
+
+export default Session;
