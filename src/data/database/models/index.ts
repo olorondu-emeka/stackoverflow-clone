@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { Sequelize } from 'sequelize';
 import * as dbConfig from '../config/config';
 
