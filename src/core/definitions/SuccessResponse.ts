@@ -29,7 +29,7 @@ export default class SuccessResponse {
    *
    * @param {string} message expected message
    * @param {DataObject} data expected data object
-   * @returns {FinalResponse} express response object
+   * @returns {FinalResponse}  response object
    */
   public static ok(message: string, data: DataObject): FinalResponse {
     const responseObject = this.getResponseObject(message, data);
@@ -43,7 +43,7 @@ export default class SuccessResponse {
    *
    * @param {string} message expected message
    * @param {DataObject} data expected data object
-   * @returns {FinalResponse} express response object
+   * @returns {FinalResponse}  response object
    */
   public static created(message: string, data: DataObject): FinalResponse {
     const responseObject = this.getResponseObject(message, data);
