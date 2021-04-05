@@ -9,7 +9,7 @@ interface SessionAttributes {
 	active: boolean;
 }
 
-interface SessionCreationAttributes extends Optional<SessionAttributes, 'id'> {}
+type SessionCreationAttributes = Optional<SessionAttributes, 'id'>;
 
 interface SessionInstance extends Model<SessionAttributes, SessionCreationAttributes>, SessionAttributes {
 	createdAt?: Date;
@@ -18,23 +18,23 @@ interface SessionInstance extends Model<SessionAttributes, SessionCreationAttrib
 
 // model definition
 const Session = sequelize.define<SessionInstance>('Session', {
-	userId: {
-		allowNull: false,
-		type: DataTypes.INTEGER
-	},
-	token: {
-		allowNull: false,
-		type: DataTypes.STRING
-	},
-	active: {
-		allowNull: false,
-		type: DataTypes.BOOLEAN,
-		defaultValue: true
-	}
+  userId: {
+    allowNull: false,
+    type: DataTypes.INTEGER
+  },
+  token: {
+    allowNull: false,
+    type: DataTypes.STRING
+  },
+  active: {
+    allowNull: false,
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
+  }
 });
 
 Session.belongsTo(User, {
-	foreignKey: 'userId',
-	onDelete: 'CASCADE',
-	onUpdate: 'CASCADE'
+  foreignKey: 'userId',
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE'
 });

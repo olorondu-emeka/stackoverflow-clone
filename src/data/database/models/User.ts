@@ -10,7 +10,7 @@ interface UserAttributes {
 	password: string;
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+type UserCreationAttributes = Optional<UserAttributes, 'id'>;
 
 interface UserInstance extends Model<UserAttributes, UserCreationAttributes>, UserAttributes {
 	createdAt?: Date;
@@ -19,24 +19,24 @@ interface UserInstance extends Model<UserAttributes, UserCreationAttributes>, Us
 
 // model definition
 const User = sequelize.define<UserInstance>('User', {
-	firstName: {
-		allowNull: false,
-		type: DataTypes.STRING
-	},
-	lastName: {
-		allowNull: false,
-		type: DataTypes.STRING
-	},
-	email: {
-		allowNull: false,
-		type: DataTypes.STRING
-	},
-	password: {
-		allowNull: false,
-		type: DataTypes.STRING
-	}
+  firstName: {
+    allowNull: false,
+    type: DataTypes.STRING
+  },
+  lastName: {
+    allowNull: false,
+    type: DataTypes.STRING
+  },
+  email: {
+    allowNull: false,
+    type: DataTypes.STRING
+  },
+  password: {
+    allowNull: false,
+    type: DataTypes.STRING
+  }
 });
 
 User.hasMany(Session, {
-	foreignKey: 'userId'
+  foreignKey: 'userId'
 });
