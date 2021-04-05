@@ -5,7 +5,7 @@ dotenv.config({ path: `${appPath}/.env` });
 
 
 export const development = {
-	username: process.env.DEV_USERNAME | 'niin',
+	username: process.env.DEV_USERNAME,
 	password: process.env.DEV_PASSWORD,
 	database: process.env.DEV_DATABASE,
 	host: process.env.DEV_HOST,
