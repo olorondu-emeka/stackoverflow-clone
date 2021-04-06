@@ -19,7 +19,7 @@
     "db:rollback": "npm run db:migrate-undo && npm run db:migrate && npm run db:seed",
     "syncenv": "node envcheck.js",
     "prepare": "husky install",
-    "pre-commit": "git add . && npx --no-install lint-staged"
+    "pre-commit": "git add && npx --no-install lint-staged"
   },
   "repository": {
     "type": "git",
@@ -33,9 +33,11 @@
   "homepage": "https://github.com/olorondu-emeka/stackoverflow-clone#readme",
   "dependencies": {
     "app-root-path": "^3.0.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
     "sequelize": "^6.6.2",
     "sequelize-cli": "^6.2.0"
@@ -43,9 +45,11 @@
   "devDependencies": {
     "@types/app-root-path": "^1.2.4",
     "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.10",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.22",
+    "@types/jsonwebtoken": "^8.5.1",
     "@types/node": "^14.14.37",
     "@types/validator": "^13.1.3",
     "@typescript-eslint/eslint-plugin": "^4.20.0",
@@ -66,7 +70,7 @@
     }
   },
   "lint-staged": {
-    "*.+(ts|js)": [
+    "*.+(ts)": [
       "eslint --fix --ext .ts ./src",
       "git add"
     ],

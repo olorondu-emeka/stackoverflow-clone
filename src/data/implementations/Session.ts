@@ -1,11 +1,11 @@
 import Session from 'core/entities/Session';
-import SessionModel from 'data/database/models/Session';
+import SessionModel, { SessionAttributes } from 'data/database/models/Session';
 import SessionInterface from 'data/interfaces/session';
 
 /**
  * @class SessionGateway
  */
-export class SessionGateway implements SessionInterface {
+export default class SessionGateway implements SessionInterface {
   #sessionModel: typeof SessionModel;
 
   /**
@@ -21,7 +21,7 @@ export class SessionGateway implements SessionInterface {
    * @param {object} sessionDetails the session details necessary for creation
    * @returns {json} a created session object
    */
-  public async create(sessionDetails: Session): Promise<Session> {
+  public async create(sessionDetails: Session): Promise<SessionAttributes> {
     const createdSession = await this.#sessionModel.create(sessionDetails);
     return createdSession;
   }
@@ -33,9 +33,9 @@ export class SessionGateway implements SessionInterface {
    * @returns {json} a session object, if it exists
    */
   public async findExistingSessionByToken(
-    userId: number,
+    userId: number | undefined,
     token: string
-  ): Promise<Session | null> {
+  ): Promise<SessionAttributes | null> {
     const possibleSession = await this.#sessionModel.findOne({
       where: {
         userId,
@@ -54,7 +54,7 @@ export class SessionGateway implements SessionInterface {
    */
   public async findExistingSessionByUserId(
     userId: number
-  ): Promise<Session | null> {
+  ): Promise<SessionAttributes | null> {
     const possibleSession = await this.#sessionModel.findOne({
       where: {
         userId,

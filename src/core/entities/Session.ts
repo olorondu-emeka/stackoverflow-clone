@@ -1,5 +1,6 @@
 export default interface Session {
-  userId: number;
+  id?: number | undefined;
+  userId: number | undefined;
   token: string;
   active: boolean;
 }

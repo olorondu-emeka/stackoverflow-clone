@@ -1,11 +1,11 @@
 import User from 'core/entities/User';
-import UserModel from 'data/database/models/User';
+import UserModel, { UserAttributes } from 'data/database/models/User';
 import UserInterface from 'data/interfaces/user';
 
 /**
  * @class UserGateway
  */
-export class UserGateway implements UserInterface {
+export default class UserGateway implements UserInterface {
   #userModel: typeof UserModel;
 
   /**
@@ -47,7 +47,7 @@ export class UserGateway implements UserInterface {
    * @param {object} userDetails user details to be used for creation
    * @returns {json} created user json object
    */
-  public async create(userDetails: User): Promise<User> {
+  public async create(userDetails: UserAttributes): Promise<User> {
     const createdUser = await this.#userModel.create(userDetails);
     return createdUser;
   }
