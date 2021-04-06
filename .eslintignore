@@ -2,3 +2,5 @@ node_modules
 build
 tsconfig.json
 dist
+envcheck.js
+**/*.js

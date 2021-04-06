@@ -1,9 +1,12 @@
-import appPath from 'app-root-path';
-import dotenv from 'dotenv';
+// import appPath from 'app-root-path';
+// import dotenv from 'dotenv';
+
+const appPath = require('app-root-path');
+const dotenv = require('dotenv');
 
 dotenv.config({ path: `${appPath}/.env` });
 
-export const development = {
+const development = {
   username: process.env.DEV_USERNAME,
   password: process.env.DEV_PASSWORD,
   database: process.env.DEV_DATABASE,
@@ -11,7 +14,7 @@ export const development = {
   dialect: 'mysql'
 };
 
-export const test = {
+const test = {
   username: process.env.TEST_USERNAME,
   password: process.env.TEST_PASSWORD,
   database: process.env.TEST_DATABASE,
@@ -19,10 +22,12 @@ export const test = {
   dialect: 'mysql'
 };
 
-export const production = {
+const production = {
   username: process.env.PROD_USERNAME,
   password: process.env.PROD_PASSWORD,
   database: process.env.PROD_DATABASE,
   host: process.env.PROD_HOST,
   dialect: 'mysql'
 };
+
+module.exports = { development, test, production };
