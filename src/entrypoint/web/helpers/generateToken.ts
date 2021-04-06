@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config({ path: `${appPath}/.env` });
 
 export interface TokenPayload {
-  [index: string]: string | number;
+  [index: string]: string | number | undefined;
 }
 
 export interface GenerateToken {

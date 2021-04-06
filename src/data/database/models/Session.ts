@@ -4,7 +4,7 @@ import { sequelize } from '.';
 
 export interface SessionAttributes {
   id?: number;
-  userId: number;
+  userId: number | undefined;
   token: string;
   active: boolean;
 }

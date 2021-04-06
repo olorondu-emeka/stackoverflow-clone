@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-catch */
 
 import User from 'core/entities/User';
+// import { UserAttributes } from 'data/database/models/User';
 import UserInterface from 'data/interfaces/user';
 import SessionInterface from 'data/interfaces/session';
 import SuccessResponse from 'core/definitions/SuccessResponse';
@@ -47,7 +48,7 @@ export default class RegisterUser {
       if (possibleUser) return ErrorResponse.conflict('user already exists');
 
       const registeredUser = await this.#userInterface.create(userDetails);
-      const userId: number = registeredUser.id;
+      const userId: number | undefined = registeredUser.id;
 
       // create session
       const token = this.#generateToken({ id: userId });

@@ -26,7 +26,7 @@
   },
   "include": [
     "src/**/*.ts",
-    "src/data/database/config/config.js",
+    "src/data/database/config/config.ts",
     "src/data/database/migrations/20210406025958-create-sessions.js",
     "src/data/database/migrations/20210406025935-create-users.js"
   ]

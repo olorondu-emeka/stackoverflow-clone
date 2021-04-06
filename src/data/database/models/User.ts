@@ -3,7 +3,7 @@ import Session from './Session';
 import { sequelize } from '.';
 
 export interface UserAttributes {
-  id?: number | undefined;
+  id?: number;
   firstName: string;
   lastName: string;
   email: string;
