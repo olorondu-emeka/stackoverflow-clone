@@ -5,7 +5,7 @@ import SessionInterface from 'data/interfaces/session';
 /**
  * @class SessionGateway
  */
-export class SessionGateway implements SessionInterface {
+export default class SessionGateway implements SessionInterface {
   #sessionModel: typeof SessionModel;
 
   /**

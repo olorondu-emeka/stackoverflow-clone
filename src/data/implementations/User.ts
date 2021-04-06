@@ -5,7 +5,7 @@ import UserInterface from 'data/interfaces/user';
 /**
  * @class UserGateway
  */
-export class UserGateway implements UserInterface {
+export default class UserGateway implements UserInterface {
   #userModel: typeof UserModel;
 
   /**
