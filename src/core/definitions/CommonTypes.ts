@@ -1,5 +1,7 @@
+import User from 'core/entities/User';
+
 export interface DataObject {
-  [index: string]: string | number | boolean;
+  [index: string]: string | number | boolean | User;
 }
 
 export interface ResponseObject {

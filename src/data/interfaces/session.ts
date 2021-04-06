@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import Session from 'core/entities/Session';
+import { SessionAttributes } from 'data/database/models/Session';
 
 export default interface SessionInterface {
-  create(sessionDetails: Session): Promise<Session | null>;
+  create(sessionDetails: SessionAttributes): Promise<Session | null>;
 
   findExistingSessionByToken(
     userId: number,

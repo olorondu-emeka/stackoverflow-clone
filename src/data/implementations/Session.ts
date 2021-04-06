@@ -1,5 +1,5 @@
 import Session from 'core/entities/Session';
-import SessionModel from 'data/database/models/Session';
+import SessionModel, { SessionAttributes } from 'data/database/models/Session';
 import SessionInterface from 'data/interfaces/session';
 
 /**
@@ -21,7 +21,7 @@ export class SessionGateway implements SessionInterface {
    * @param {object} sessionDetails the session details necessary for creation
    * @returns {json} a created session object
    */
-  public async create(sessionDetails: Session): Promise<Session> {
+  public async create(sessionDetails: SessionAttributes): Promise<Session> {
     const createdSession = await this.#sessionModel.create(sessionDetails);
     return createdSession;
   }
