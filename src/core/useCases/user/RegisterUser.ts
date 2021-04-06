@@ -1,13 +1,12 @@
 /* eslint-disable no-useless-catch */
 
-import User from 'core/entities/User';
-// import { UserAttributes } from 'data/database/models/User';
 import UserInterface from 'data/interfaces/user';
 import SessionInterface from 'data/interfaces/session';
 import SuccessResponse from 'core/definitions/SuccessResponse';
 import ErrorResponse from 'core/definitions/ErrorResponse';
 import { FinalResponse } from 'core/definitions/CommonTypes';
 import { GenerateToken } from 'entrypoint/web/helpers/generateToken';
+import { UserAttributes } from 'data/database/models/User';
 
 /**
  * @class RegisterUser
@@ -39,7 +38,7 @@ export default class RegisterUser {
    * @param {User} userDetails incoming user details to be registered
    * @returns {User} registered user object
    */
-  public async execute(userDetails: User): Promise<FinalResponse> {
+  public async execute(userDetails: UserAttributes): Promise<FinalResponse> {
     try {
       const possibleUser = await this.#userInterface.findByEmail(
         userDetails.email
@@ -53,6 +52,9 @@ export default class RegisterUser {
       // create session
       const token = this.#generateToken({ id: userId });
       await this.#sessionInterface.create({ userId, token, active: true });
+
+      // delete sensitive info
+      delete registeredUser.password;
 
       // return a response
       return SuccessResponse.created('user registered successfully', {

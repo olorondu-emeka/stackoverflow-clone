@@ -1,5 +1,4 @@
 import { Model, Optional, DataTypes } from 'sequelize';
-import User from './User';
 import { sequelize } from '.';
 
 export interface SessionAttributes {
@@ -33,12 +32,6 @@ const Session = sequelize.define<SessionInstance>('Session', {
     type: DataTypes.BOOLEAN,
     defaultValue: true
   }
-});
-
-Session.belongsTo(User, {
-  foreignKey: 'userId',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
 });
 
 export default Session;

@@ -42,5 +42,10 @@ const User = sequelize.define<UserInstance>('User', {
 User.hasMany(Session, {
   foreignKey: 'userId'
 });
+Session.belongsTo(User, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE'
+});
 
 export default User;

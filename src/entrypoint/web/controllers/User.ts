@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import ErrorResponse from 'core/definitions/ErrorResponse';
 import generateResponse from 'entrypoint/web/helpers/generateResponse';
+import passwordHelper from 'entrypoint/web/helpers/passwordHelper';
 import { RegisterUserUC } from 'config/UseCases';
 
 /**
@@ -16,11 +17,12 @@ export default class UserController {
   static async registerUser(req: Request, res: Response): Promise<Response> {
     try {
       const { lastName, firstName, email, password } = req.body;
+      const hashedPassword = passwordHelper.hash(password);
       const response = await RegisterUserUC.execute({
         lastName,
         firstName,
         email,
-        password
+        password: hashedPassword
       });
 
       const { statusCode, data } = response;
