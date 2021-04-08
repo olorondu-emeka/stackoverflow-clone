@@ -39,6 +39,7 @@ const User = sequelize.define<UserInstance>('User', {
   }
 });
 
+// associations
 User.hasMany(Session, {
   foreignKey: 'userId'
 });

@@ -1,8 +1,5 @@
-import appPath from 'app-root-path';
-import dotenv from 'dotenv';
-
-// const appPath = require('app-root-path');
-// const dotenv = require('dotenv');
+import * as appPath from 'app-root-path';
+import * as dotenv from 'dotenv';
 
 dotenv.config({ path: `${appPath}/.env` });
 
