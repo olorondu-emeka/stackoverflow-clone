@@ -19,7 +19,7 @@
     "db:rollback": "npm run db:migrate-undo && npm run db:migrate && npm run db:seed",
     "syncenv": "node envcheck.js",
     "prepare": "husky install",
-    "pre-commit": "git add && npx --no-install lint-staged"
+    "pre-commit": "git add . && npx --no-install lint-staged"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
     "sequelize": "^6.6.2",
@@ -48,6 +49,7 @@
     "@types/cors": "^2.8.10",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.11",
+    "@types/express-validator": "^3.0.0",
     "@types/jest": "^26.0.22",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/node": "^14.14.37",
@@ -72,11 +74,11 @@
   "lint-staged": {
     "*.+(ts)": [
       "eslint --fix --ext .ts ./src",
-      "git add"
+      "git add ."
     ],
     "*.+(json|md)": [
       "prettier --write",
-      "git add"
+      "git add ."
     ],
     "*.ts": "eslint --cache --fix"
   }
