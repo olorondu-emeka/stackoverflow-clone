@@ -1,4 +1,6 @@
 import { validationResult, ValidationError } from 'express-validator';
+import ErrorResponse from 'core/definitions/ErrorResponse';
+import generateResponse from 'entrypoint/web/helpers/generateResponse';
 import { Request, Response, NextFunction } from 'express';
 
 type Location = 'body' | 'cookies' | 'headers' | 'params' | 'query' | '';
@@ -42,6 +44,10 @@ export default (
       errorFormatter(resultObject)
   );
   if (Object.keys(error).length > 0) {
+    const { statusCode, data } = ErrorResponse.badRequest('bad request', {
+      ...error
+    });
+    return generateResponse(response, statusCode, data);
     response.status(400).json({ ...error });
   } else {
     next();

@@ -107,6 +107,7 @@ export default class UserValidator {
       UserValidator.checkName('firstName'),
       UserValidator.checkUserEmail(),
       UserValidator.checkPhoneNumber('phoneNumber'),
+      UserValidator.checkPassword(),
       checkForErrors,
       emptyBody
     ];
@@ -118,6 +119,11 @@ export default class UserValidator {
    * @memberof UserValidator
    */
   static loginValidation(): Array<ValidationArray> {
-    return [UserValidator.checkPassword(), emptyBody]; // checkForErrors, emptyBody];
+    return [
+      UserValidator.checkUserEmail(),
+      UserValidator.checkPassword(),
+      checkForErrors,
+      emptyBody
+    ]; // checkForErrors, emptyBody];
   }
 }

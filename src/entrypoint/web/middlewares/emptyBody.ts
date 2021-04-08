@@ -16,7 +16,7 @@ const emptyBody = (
 ): Response | void => {
   const { body } = request;
   if (Object.keys(body).length === 0) {
-    const errorResponse = ErrorResponse.badRequest('empty request body');
+    const errorResponse = ErrorResponse.badRequest('empty request body', null);
     const { statusCode, data } = errorResponse;
     return generateResponse(response, statusCode, data);
   } else {

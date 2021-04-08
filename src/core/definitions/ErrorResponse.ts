@@ -1,4 +1,8 @@
-import { FinalResponse, ResponseObject } from 'core/definitions/CommonTypes';
+import {
+  FinalResponse,
+  ResponseObject,
+  DataObject
+} from 'core/definitions/CommonTypes';
 
 /**
  * @class ErrorResponse
@@ -10,11 +14,14 @@ export default class ErrorResponse {
    * @param {object} data the required data
    * @returns {ResponseObject} the response object
    */
-  private static getResponseObject(message: string): ResponseObject {
+  private static getResponseObject(
+    message: string,
+    data: DataObject | null = null
+  ): ResponseObject {
     return {
       message,
       status: 'error',
-      data: null
+      data
     };
   }
 
@@ -73,10 +80,14 @@ export default class ErrorResponse {
   /**
    *
    * @param {string} message expected message
+   * @param {DataObject} data expected data object
    * @returns {Response} express response object
    */
-  public static badRequest(message: string): FinalResponse {
-    const responseObject = this.getResponseObject(message);
+  public static badRequest(
+    message: string,
+    data: DataObject | null
+  ): FinalResponse {
+    const responseObject = this.getResponseObject(message, data);
     return {
       statusCode: 400,
       data: responseObject
