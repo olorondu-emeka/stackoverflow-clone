@@ -16,6 +16,7 @@ export default class UserController {
    */
   static async registerUser(req: Request, res: Response): Promise<Response> {
     try {
+      // UC stands for: use case
       const { lastName, firstName, email, password } = req.body;
       const hashedPassword = passwordHelper.hash(password);
       const response = await RegisterUserUC.execute({
@@ -28,7 +29,6 @@ export default class UserController {
       const { statusCode, data } = response;
       return generateResponse(res, statusCode, data);
     } catch (error) {
-      console.error(error);
       const errorResponse = ErrorResponse.serverError(error.message);
       const { statusCode, data } = errorResponse;
       return generateResponse(res, statusCode, data);

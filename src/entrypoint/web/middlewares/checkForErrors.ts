@@ -48,7 +48,6 @@ export default (
       ...error
     });
     return generateResponse(response, statusCode, data);
-    response.status(400).json({ ...error });
   } else {
     next();
   }
