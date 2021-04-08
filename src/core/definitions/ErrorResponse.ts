@@ -62,6 +62,19 @@ export default class ErrorResponse {
    * @param {string} message expected message
    * @returns {Response} express response object
    */
+  public static notFound(message: string): FinalResponse {
+    const responseObject = this.getResponseObject(message);
+    return {
+      statusCode: 404,
+      data: responseObject
+    };
+  }
+
+  /**
+   *
+   * @param {string} message expected message
+   * @returns {Response} express response object
+   */
   public static badRequest(message: string): FinalResponse {
     const responseObject = this.getResponseObject(message);
     return {
