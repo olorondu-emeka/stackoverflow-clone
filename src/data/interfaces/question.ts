@@ -6,6 +6,8 @@ export type QuestionArray = Array<QuestionAttributes>;
 
 export default interface QuestionInterface {
   create(questionDetails: QuestionAttributes): Promise<Question>;
-  findExistingQuestionByTitle(title: string): Promise<QuestionAttributes>;
+  findExistingQuestionByTitle(
+    title: string
+  ): Promise<QuestionAttributes | null>;
   findSimilarQuestionByTitle(title: string): Promise<QuestionArray>;
 }
