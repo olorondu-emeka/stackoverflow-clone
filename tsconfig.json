@@ -20,8 +20,7 @@
       "core/*": ["./src/core/*"],
       "data/*": ["./src/data/*"],
       "entrypoint/*": ["./src/entrypoint/*"],
-      "config/*": ["./src/config/*"],
-      "__fixtures__/*": ["./src/__fixtures__/*"]
+      "config/*": ["./src/config/*"]
     }
   },
   "include": [

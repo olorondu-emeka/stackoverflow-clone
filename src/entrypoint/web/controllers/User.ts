@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Request, Response } from 'express';
 import ErrorResponse from 'core/definitions/ErrorResponse';
 import generateResponse from 'entrypoint/web/helpers/generateResponse';
@@ -26,7 +27,20 @@ export default class UserController {
         password: hashedPassword
       });
 
-      const { statusCode, data } = response;
+      const { statusCode } = response;
+      const { data } = response;
+
+      if (data.data !== null) {
+        let { user } = data.data;
+        //@ts-ignore
+        user = user.dataValues;
+        //@ts-ignore
+        delete user.id;
+        //@ts-ignore
+        delete user.password;
+
+        data.data.user = user;
+      }
       return generateResponse(res, statusCode, data);
     } catch (error) {
       const errorResponse = ErrorResponse.serverError(error.message);

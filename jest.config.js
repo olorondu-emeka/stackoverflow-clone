@@ -4,12 +4,14 @@ const { pathsToModuleNameMapper } = require('ts-jest/utils');
 const { compilerOptions } = require('./tsconfig');
 
 module.exports = {
-	coverageDirectory: 'coverage',
-	moduleDirectories: ['node_modules', 'src'],
-	roots: ['<rootDir>/src'],
-	testMatch: ['**/__tests__/**/*.+(ts|tsx|js)', '**/?(*.)+(spec|test).+(ts|tsx|js)'],
-	transform: {
-		'^.+\\.(ts|tsx)$': 'ts-jest'
-	},
-	moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' })
+  coverageDirectory: 'coverage',
+  moduleDirectories: ['node_modules'],
+  roots: ['<rootDir>'],
+  testMatch: ['**/?(*.)+(spec|test).+(ts|tsx|js)'],
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest'
+  },
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+    prefix: '<rootDir>/'
+  })
 };

@@ -3,7 +3,14 @@ import Question from 'core/entities/Question';
 import { QuestionArray } from 'data/interfaces/question';
 
 export interface DataObject {
-  [index: string]: string | number | boolean | User | Question | QuestionArray;
+  [index: string]:
+    | string
+    | number
+    | boolean
+    | User
+    | Question
+    | QuestionArray
+    | null;
 }
 
 // export interface QuestionDataObject {
