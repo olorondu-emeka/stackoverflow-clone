@@ -18,8 +18,7 @@
     "db:migrate": "sequelize db:migrate",
     "db:rollback": "npm run db:migrate-undo && npm run db:migrate && npm run db:seed",
     "syncenv": "node envcheck.js",
-    "prepare": "husky install",
-    "pre-commit": "git add . && npx --no-install lint-staged"
+    "pre-commit": "npm run syncenv && git add . && npx --no-install lint-staged"
   },
   "repository": {
     "type": "git",

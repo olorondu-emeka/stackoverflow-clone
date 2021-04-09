@@ -1,6 +1,6 @@
-import QuestionGateway from '../../__mocks__/dataGateways/QuestionGateway';
-import AskQuestion from '../../../src/core/useCases/Question/AskQuestion';
-import { getNewQuestion } from '../../__mocks__/entities/Question';
+import QuestionGateway from '../../__mocks__/dataGateways/questionGateway';
+import AskQuestion from '../../../src/core/useCases/question/AskQuestion';
+import { getNewQuestion } from '../../__mocks__/entities/question';
 import { FinalResponse } from '../../../src/core/definitions/CommonTypes';
 
 const newQuestion = getNewQuestion();

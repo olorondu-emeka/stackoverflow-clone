@@ -63,7 +63,9 @@ export default class QuestionGateway implements QuestionInterface {
    * @param {string} title the title of the question
    * @returns {QuestionArray} an array of questions, if found, or an empty array otherwise
    */
-  public async findSimilarQuestionByTitle(title: string): Promise<QuestionArray> {
-    return [this.#question];
+  public async findSimilarQuestionByTitle(
+    title: string
+  ): Promise<QuestionArray> {
+    return [getNewQuestion()];
   }
 }
