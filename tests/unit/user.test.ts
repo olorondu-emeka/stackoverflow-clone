@@ -31,4 +31,12 @@ describe('Unit tests -- User', () => {
     expect(statusCode).toEqual(201);
     expect(data).toHaveProperty('status', 'success');
   });
+
+  it('should throw a conflict error for an already existing user', async () => {
+    const response: FinalResponse = await RegisterUserUC.execute(newUser);
+    const { statusCode, data } = response;
+
+    expect(statusCode).toEqual(409);
+    expect(data).toHaveProperty('status', 'error');
+  });
 });
