@@ -1,5 +1,4 @@
 /* eslint-disable no-useless-catch */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import UserInterface from 'data/interfaces/user';
 import SessionInterface from 'data/interfaces/session';
@@ -41,24 +40,22 @@ export default class RegisterUser {
    */
   public async execute(userDetails: UserAttributes): Promise<FinalResponse> {
     try {
-      const possibleUser = await this.#userInterface.findByEmail(
-        userDetails.email
-      );
+      const possibleUser = await this.#userInterface.findByEmail(userDetails.email);
 
       if (possibleUser) return ErrorResponse.conflict('user already exists');
 
-      let registeredUser = await this.#userInterface.create(userDetails);
-      const userId: number | undefined = registeredUser.id;
+      await this.#userInterface.create(userDetails);
+      const registeredUser = await this.#userInterface.findByEmail(
+        userDetails.email
+      );
+      let userId: number | undefined;
+      if (registeredUser !== null) {
+        userId = registeredUser.id;
+      }
 
       // create session
       const token = this.#generateToken({ id: userId });
       await this.#sessionInterface.create({ userId, token, active: true });
-
-      // @ts-ignore
-      registeredUser = registeredUser.dataValues;
-      // delete sensitive info
-      delete registeredUser.password;
-      delete registeredUser.id;
 
       // return a response
       return SuccessResponse.created('user registered successfully', {

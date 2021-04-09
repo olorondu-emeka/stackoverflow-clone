@@ -1,10 +1,4 @@
-import express, {
-  json,
-  urlencoded,
-  Request,
-  Response,
-  NextFunction
-} from 'express';
+import express, { json, urlencoded, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 
 import routes from 'entrypoint/web/routes';
@@ -30,7 +24,9 @@ app.use('*', (request, response) => {
   response.status(404).send('Not Found');
 });
 
-// eslint-disable-next-line no-console
-app.listen(PORT, () => console.info(`Server started on port ${PORT}`));
+if (process.env.NODE_ENV !== 'test') {
+  // eslint-disable-next-line no-console
+  app.listen(PORT, () => console.info(`Server started on port ${PORT}`));
+}
 
 export default app;

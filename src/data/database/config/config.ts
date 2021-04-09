@@ -12,6 +12,7 @@ export interface IDbDetails {
   database?: string;
   host?: string;
   dialect?: Dialect;
+  logging?: boolean;
 }
 
 export interface IDbObject {
@@ -25,6 +26,7 @@ const development = {
   password: process.env.DEV_PASSWORD || '',
   database: process.env.DEV_DATABASE || '',
   host: process.env.DEV_HOST || '',
+  logging: false,
   dialect: mainDialect
 };
 
@@ -33,6 +35,7 @@ const test = {
   password: process.env.TEST_PASSWORD || '',
   database: process.env.TEST_DATABASE || '',
   host: process.env.TEST_HOST || '',
+  logging: false,
   dialect: mainDialect
 };
 
@@ -41,6 +44,7 @@ const production = {
   password: process.env.PROD_PASSWORD || '',
   database: process.env.PROD_DATABASE || '',
   host: process.env.PROD_HOST || '',
+  logging: false,
   dialect: mainDialect
 };
 
