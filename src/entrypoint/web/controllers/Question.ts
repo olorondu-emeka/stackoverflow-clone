@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import ErrorResponse from 'core/definitions/ErrorResponse';
-import slugify from 'slugify';
+import generateSlug from 'entrypoint/web/helpers/generateSlug';
 import generateResponse from 'entrypoint/web/helpers/generateResponse';
 import { AskQuestionUC } from 'config/UseCases';
 
@@ -17,7 +17,7 @@ export default class QuestionController {
   static async askQuestion(req: Request, res: Response): Promise<Response> {
     try {
       const { title, body, userId } = req.body;
-      const slug = slugify(title, '-');
+      const slug = generateSlug(title);
       const response = await AskQuestionUC.execute({
         userId,
         title,

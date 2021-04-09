@@ -26,26 +26,22 @@ export default class AskQuestion {
    * @param {QuestionAttributes} questionDetails details for question to be asked
    * @returns {Question} registered question object
    */
-  public async execute(
-    questionDetails: QuestionAttributes
-  ): Promise<FinalResponse> {
+  public async execute(questionDetails: QuestionAttributes): Promise<FinalResponse> {
     try {
       const possibleQuestion = await this.#questionInterface.findExistingQuestionByTitle(
         questionDetails.title
       );
-      if (possibleQuestion)
-        return ErrorResponse.conflict('question already exists');
+      if (possibleQuestion) return ErrorResponse.conflict('question already exists');
 
       const registeredQuestion = await this.#questionInterface.create(
         questionDetails
       );
-      const similarQuestions = await this.#questionInterface.findSimilarQuestionByTitle(
-        questionDetails.title
-      );
+      // const similarQuestions = await this.#questionInterface.findSimilarQuestionByTitle(
+      //   questionDetails.title
+      // );
 
       return SuccessResponse.created('question registered successfully', {
-        question: registeredQuestion,
-        similarQuestions
+        question: registeredQuestion
       });
     } catch (error) {
       throw error;

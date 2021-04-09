@@ -1,8 +1,6 @@
 import { Op } from 'sequelize';
 import Question from 'core/entities/Question';
-import QuestionModel, {
-  QuestionAttributes
-} from 'data/database/models/Question';
+import QuestionModel, { QuestionAttributes } from 'data/database/models/Question';
 import QuestionInterface, { QuestionArray } from 'data/interfaces/question';
 
 /**
@@ -50,13 +48,14 @@ export default class QuestionGateway implements QuestionInterface {
    * @param {string} title the title of the question
    * @returns {QuestionArray} an array of questions, if found, or an empty array otherwise
    */
-  public async findSimilarQuestionByTitle(
-    title: string
-  ): Promise<QuestionArray> {
+  public async findSimilarQuestionByTitle(title: string): Promise<QuestionArray> {
+    const titleArray = title.split(' ').map((title) => `%${title}%`);
     const possibleQuestions = await this.#questionModel.findAll({
       where: {
-        title: {
-          [Op.like]: `%${title}%`
+        [Op.and]: {
+          title: {
+            [Op.like]: titleArray
+          }
         }
       }
     });
