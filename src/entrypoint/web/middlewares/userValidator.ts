@@ -73,10 +73,7 @@ export default class UserValidator {
       .not()
       .matches(/^[A-Za-z]+[']+[A-Za-z]+[']+[A-Za-z]+$/, 'g')
       .withMessage(`invalid input for ${name}`)
-      .matches(
-        /^[A-Za-z]+(['-]?[A-Za-z]+)?([ -]?[A-Za-z]+)?(['-]?[A-Za-z]+)?$/,
-        'g'
-      )
+      .matches(/^[A-Za-z]+(['-]?[A-Za-z]+)?([ -]?[A-Za-z]+)?(['-]?[A-Za-z]+)?$/, 'g')
       .withMessage(`invalid input for ${name}`)
       .customSanitizer((value) => makeLowerCase(value));
   }
@@ -106,7 +103,6 @@ export default class UserValidator {
       UserValidator.checkName('lastName'),
       UserValidator.checkName('firstName'),
       UserValidator.checkUserEmail(),
-      UserValidator.checkPhoneNumber('phoneNumber'),
       UserValidator.checkPassword(),
       checkForErrors,
       emptyBody

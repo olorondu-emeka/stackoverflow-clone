@@ -1,11 +1,16 @@
 // interface implementations (gateways)
-import { UserDataGateway, SessionDataGateway } from 'config/Interfaces';
+import {
+  UserDataGateway,
+  SessionDataGateway,
+  QuestionDataGateway
+} from 'config/Interfaces';
 
 // helper functions
 import generateToken from 'entrypoint/web/helpers/generateToken';
 
 // use cases classes
 import RegisterUser from 'core/useCases/user/RegisterUser';
+import AskQuestion from 'core/useCases/question/AskQuestion';
 
 // use cases instantiations
 const RegisterUserUC = new RegisterUser(
@@ -13,6 +18,7 @@ const RegisterUserUC = new RegisterUser(
   SessionDataGateway,
   generateToken
 );
+const AskQuestionUC = new AskQuestion(QuestionDataGateway);
 
 // export use cases instantiations
-export { RegisterUserUC };
+export { RegisterUserUC, AskQuestionUC };

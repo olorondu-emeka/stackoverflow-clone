@@ -1,8 +1,14 @@
 import User from 'core/entities/User';
+import Question from 'core/entities/Question';
+import { QuestionArray } from 'data/interfaces/question';
 
 export interface DataObject {
-  [index: string]: string | number | boolean | User;
+  [index: string]: string | number | boolean | User | Question | QuestionArray;
 }
+
+// export interface QuestionDataObject {
+//   [index: string]: string | number | boolean | User | Question;
+// }
 
 export interface ResponseObject {
   message: string;
