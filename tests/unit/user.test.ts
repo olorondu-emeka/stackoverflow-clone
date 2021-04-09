@@ -6,7 +6,6 @@ import { getNewUser } from '../__mocks__/entities/user';
 import { FinalResponse } from '../../src/core/definitions/CommonTypes';
 
 const newUser = getNewUser();
-// const badUser = getBadUser();
 
 const UserDataGateway = new UserGateway();
 const SessionDataGateway = new SessionGateway();
@@ -17,7 +16,7 @@ const RegisterUserUC = new RegisterUser(
   generateToken
 );
 
-describe('Unit tests -- User', () => {
+describe('Unit Test -- User', () => {
   afterEach(() => {
     UserDataGateway.resetDefault();
   });

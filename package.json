@@ -9,7 +9,7 @@
     "start:prod": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
     "build": "npm run lint && npm run clean && tsc",
     "clean": "rimraf dist",
-    "test": "jest --maxWorkers=4 --coverage",
+    "test": "jest --coverage",
     "coverage": "jest --coverage",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
