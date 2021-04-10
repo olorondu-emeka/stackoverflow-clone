@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npm install -g jest
+      - run: npm install --save-dev jest
       - run: npm test tests/unit
 
 workflows:
