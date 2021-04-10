@@ -1,7 +1,7 @@
 import request from 'supertest';
-import app from '../../src';
-import { getBadUser, getNewUser } from '../__mocks__/entities/user';
-import UserModel from '../../src/data/database/models/User';
+import app from '../../../src';
+import { getBadUser, getNewUser } from '../../__mocks__/entities/user';
+import UserModel from '../../../src/data/database/models/User';
 
 const newUser = getNewUser();
 const badUser = getBadUser();
