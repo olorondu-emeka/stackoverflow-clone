@@ -1,4 +1,10 @@
+/* eslint-disable no-unused-vars */
+
 import bcrypt from 'bcryptjs';
+
+export interface VerifyPassword {
+  (password: string, hash: string): boolean;
+}
 
 /**
  * @export
