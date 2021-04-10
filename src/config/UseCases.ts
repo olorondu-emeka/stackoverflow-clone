@@ -12,6 +12,7 @@ import passwordHelper from 'entrypoint/web/helpers/passwordHelper';
 // use cases classes
 import RegisterUser from 'core/useCases/user/RegisterUser';
 import CreateSession from 'core/useCases/user/CreateSession';
+import DestroySession from 'core/useCases/user/DestroySession';
 import AskQuestion from 'core/useCases/question/AskQuestion';
 
 // use cases instantiations
@@ -26,7 +27,8 @@ const CreateSessionUC = new CreateSession(
   generateToken,
   passwordHelper.verify
 );
+const DestroySessionUC = new DestroySession(SessionDataGateway);
 const AskQuestionUC = new AskQuestion(QuestionDataGateway);
 
 // export use cases instantiations
-export { RegisterUserUC, CreateSessionUC, AskQuestionUC };
+export { RegisterUserUC, CreateSessionUC, DestroySessionUC, AskQuestionUC };
