@@ -21,4 +21,6 @@ export default interface QuestionInterface {
   ): Promise<AnswerAttributes | null>;
 
   createAnswer(answerDetails: AnswerAttributes): Promise<void>;
+
+  updateQuestionVotes(questionId: number, totalVotes: number): Promise<void>;
 }

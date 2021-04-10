@@ -113,4 +113,20 @@ export default class QuestionGateway implements QuestionInterface {
   public async createAnswer(answerDetails: AnswerAttributes): Promise<void> {
     await this.#answerModel.create(answerDetails);
   }
+
+  /**
+   *
+   * @param {integer} questionId question id
+   * @param {integer} totalVotes total votes
+   * @returns {void}
+   */
+  public async updateQuestionVotes(
+    questionId: number,
+    totalVotes: number
+  ): Promise<void> {
+    await this.#questionModel.update(
+      { votes: totalVotes },
+      { where: { id: questionId } }
+    );
+  }
 }
