@@ -41,7 +41,7 @@ export default class VoteQuestion {
         possibleQuestion.votes === null ||
         possibleQuestion.votes === undefined
       )
-        throw new Error('votes is undefined!');
+        return ErrorResponse.serverError('votes is undefined!');
 
       let totalVotes: number = possibleQuestion.votes;
       switch (voteOption) {
