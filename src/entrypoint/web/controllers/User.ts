@@ -45,6 +45,7 @@ export default class UserController {
       }
       return generateResponse(res, statusCode, data);
     } catch (error) {
+      console.log('user error', error);
       const errorResponse = ErrorResponse.serverError(error.message);
       const { statusCode, data } = errorResponse;
       return generateResponse(res, statusCode, data);
