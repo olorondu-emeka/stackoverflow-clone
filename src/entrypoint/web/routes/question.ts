@@ -18,4 +18,11 @@ route.post(
   QuestionController.answerQuestion
 );
 
+route.post(
+  '/:questionId/vote',
+  QuestionValidator.checkVoteQuestion(),
+  verifyUserToken,
+  QuestionController.voteQuestion
+);
+
 export default route;

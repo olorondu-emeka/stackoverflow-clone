@@ -23,12 +23,12 @@ export default class VoteQuestion {
   /**
    *
    * @param {string} questionId question id
-   * @param {string} nature upvote/downvote
+   * @param {string} voteOption upvote/downvote
    * @returns {json} json object containing response
    */
   public async execute(
     questionId: number,
-    nature: string
+    voteOption: string
   ): Promise<FinalResponse> {
     try {
       const possibleQuestion = await this.#questionInterface.findExistingQuestionById(
@@ -44,7 +44,7 @@ export default class VoteQuestion {
         throw new Error('votes is undefined!');
 
       let totalVotes: number = possibleQuestion.votes;
-      switch (nature) {
+      switch (voteOption) {
       case 'upvote':
         totalVotes += 1;
         break;

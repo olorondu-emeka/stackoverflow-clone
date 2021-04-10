@@ -81,4 +81,29 @@ export default class QuestionValidator {
       emptyBody
     ];
   }
+
+  /**
+   *
+   * @returns {ValidationChain} validation chain
+   *
+   */
+  static checkVoteOption(): ValidationChain {
+    return CommonValidator.genericCheck('voteOption')
+      .trim()
+      .isIn(['upvote', 'downvote'])
+      .withMessage('voteOption must be: upvote/downvote');
+  }
+
+  /**
+   * Question Validator: check ask question
+   * @returns {array} an array of Check API middlewares
+   * @memberof QuestionValidator
+   */
+  static checkVoteQuestion(): Array<ValidationArray> {
+    return [
+      QuestionValidator.checkVoteOption(),
+      QuestionValidator.checkNumericField('questionId'),
+      checkForErrors
+    ];
+  }
 }
