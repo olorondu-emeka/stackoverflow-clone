@@ -52,6 +52,16 @@ export default class QuestionGateway implements QuestionInterface {
   }
 
   /**
+   * @returns {void}
+   */
+  public addVotes(): void {
+    if (!this.#question) {
+      this.#question = getNewQuestion();
+    }
+    this.#question.votes = 12;
+  }
+
+  /**
    *
    * @param {Question} questionDetails details of the question to be created
    * @returns {Question} the created question
@@ -111,4 +121,15 @@ export default class QuestionGateway implements QuestionInterface {
    * @returns {void}
    */
   public async createAnswer(answerDetails: AnswerAttributes): Promise<void> {}
+
+  /**
+   *
+   * @param {number} questionId question id
+   * @param {number} totalVotes total votes
+   * @returns {void}
+   */
+  public async updateQuestionVotes(
+    questionId: number,
+    totalVotes: number
+  ): Promise<void> {}
 }

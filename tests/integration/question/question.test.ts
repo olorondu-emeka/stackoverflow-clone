@@ -123,3 +123,45 @@ describe('Integration Test -- Answer Question', () => {
     expect(response.body.status).toEqual('error');
   });
 });
+
+describe('Integration Test -- Vote Question', () => {
+  it('should throw a 400 error for incomplete details', async () => {
+    const response = await request(app)
+      .post(`/api/v1/questions/${questionId}/vote`)
+      .set('Authorization', registeredUserToken)
+      .send(newAnswer);
+
+    expect(response.status).toEqual(400);
+    expect(response.body.status).toEqual('error');
+  });
+
+  it('should throw a 404 error for a non-existent question', async () => {
+    const response = await request(app)
+      .post(`/api/v1/questions/${1500}/vote?voteOption=upvote`)
+      .set('Authorization', registeredUserToken)
+      .send(newAnswer);
+
+    expect(response.status).toEqual(404);
+    expect(response.body.status).toEqual('error');
+  });
+
+  it('should successfully upvote a question', async () => {
+    const response = await request(app)
+      .post(`/api/v1/questions/${questionId}/vote?voteOption=upvote`)
+      .set('Authorization', registeredUserToken)
+      .send(newAnswer);
+
+    expect(response.status).toEqual(200);
+    expect(response.body.status).toEqual('success');
+  });
+
+  it('should successfully downvote a question', async () => {
+    const response = await request(app)
+      .post(`/api/v1/questions/${questionId}/vote?voteOption=downvote`)
+      .set('Authorization', registeredUserToken)
+      .send(newAnswer);
+
+    expect(response.status).toEqual(200);
+    expect(response.body.status).toEqual('success');
+  });
+});

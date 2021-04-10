@@ -15,6 +15,7 @@ import CreateSession from 'core/useCases/user/CreateSession';
 import DestroySession from 'core/useCases/user/DestroySession';
 import AskQuestion from 'core/useCases/question/AskQuestion';
 import AnswerQuestion from 'core/useCases/question/AnswerQuestion';
+import VoteQuestion from 'core/useCases/question/VoteQuestion';
 
 // use cases instantiations
 const RegisterUserUC = new RegisterUser(
@@ -31,6 +32,7 @@ const CreateSessionUC = new CreateSession(
 const DestroySessionUC = new DestroySession(SessionDataGateway);
 const AskQuestionUC = new AskQuestion(QuestionDataGateway);
 const AnswerQuestionUC = new AnswerQuestion(QuestionDataGateway);
+const VoteQuestionUC = new VoteQuestion(QuestionDataGateway);
 
 // export use cases instantiations
 export {
@@ -38,5 +40,6 @@ export {
   CreateSessionUC,
   DestroySessionUC,
   AskQuestionUC,
-  AnswerQuestionUC
+  AnswerQuestionUC,
+  VoteQuestionUC
 };
