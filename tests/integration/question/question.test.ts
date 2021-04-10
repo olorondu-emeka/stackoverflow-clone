@@ -3,7 +3,9 @@ import app from '../../../src';
 import { getNewUser } from '../../__mocks__/entities/user';
 import {
   getNewQuestion,
-  getBadQuestion
+  getBadQuestion,
+  getNewAnswer,
+  getBadAnswer
 } from '../../__mocks__/entities/question';
 import generateToken from '../../../src/entrypoint/web/helpers/generateToken';
 import QuestionModel from '../../../src/data/database/models/Question';
@@ -16,18 +18,14 @@ dotenv.config({ path: `${appPath}/.env` });
 const newUser = getNewUser();
 const newQuestion = getNewQuestion();
 const badQuestion = getBadQuestion();
+
+const newAnswer = getNewAnswer();
+const badAnswer = getBadAnswer();
 const testToken = generateToken({ id: 0 });
 let registeredUserToken = '';
+let questionId: number;
 
-describe('Integration Test -- Question', () => {
-  afterAll(async () => {
-    await QuestionModel.destroy({
-      where: {
-        title: newQuestion.title
-      }
-    });
-  });
-
+describe('Integration Test -- Ask Question', () => {
   it('should throw an error for incomplete question details', async () => {
     const response = await request(app)
       .post('/api/v1/questions')
@@ -69,8 +67,59 @@ describe('Integration Test -- Question', () => {
       .post('/api/v1/questions')
       .set('Authorization', registeredUserToken)
       .send(newQuestion);
+    questionId = response.body.data.question.id;
 
     expect(response.status).toEqual(201);
     expect(response.body.status).toEqual('success');
+  });
+});
+
+describe('Integration Test -- Answer Question', () => {
+  afterAll(async () => {
+    await QuestionModel.destroy({
+      where: {
+        title: newQuestion.title
+      }
+    });
+  });
+
+  it('should throw a 400 error for an incomplete answer body', async () => {
+    const response = await request(app)
+      .post(`/api/v1/questions/${1500}/answers`)
+      .set('Authorization', registeredUserToken)
+      .send(badAnswer);
+
+    expect(response.status).toEqual(400);
+    expect(response.body.status).toEqual('error');
+  });
+
+  it('should throw a 404 error for a non-existent question', async () => {
+    const response = await request(app)
+      .post(`/api/v1/questions/${1500}/answers`)
+      .set('Authorization', registeredUserToken)
+      .send(newAnswer);
+
+    expect(response.status).toEqual(404);
+    expect(response.body.status).toEqual('error');
+  });
+
+  it('should answer an existing question successfully', async () => {
+    const response = await request(app)
+      .post(`/api/v1/questions/${questionId}/answers`)
+      .set('Authorization', registeredUserToken)
+      .send(newAnswer);
+
+    expect(response.status).toEqual(201);
+    expect(response.body.status).toEqual('success');
+  });
+
+  it('should throw a 409 error for an already existing answer', async () => {
+    const response = await request(app)
+      .post(`/api/v1/questions/${questionId}/answers`)
+      .set('Authorization', registeredUserToken)
+      .send(newAnswer);
+
+    expect(response.status).toEqual(409);
+    expect(response.body.status).toEqual('error');
   });
 });

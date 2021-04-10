@@ -89,14 +89,17 @@ export default class QuestionGateway implements QuestionInterface {
   /**
    *
    * @param {integer} userId user id
+   * @param {integer} questionId question id
    * @returns {AnswerAttributes} answer object, if found
    */
   public async findAnswerByUserId(
-    userId: number | undefined
+    userId: number | undefined,
+    questionId: number | undefined
   ): Promise<AnswerAttributes | null> {
     const possibleAnswer = await this.#answerModel.findOne({
       where: {
-        userId
+        userId,
+        questionId
       }
     });
     return possibleAnswer;

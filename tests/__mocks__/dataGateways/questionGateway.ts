@@ -36,10 +36,19 @@ export default class QuestionGateway implements QuestionInterface {
   }
 
   /**
+   * @param {Answer} answer answer to be set
+   * @returns {void}
+   */
+  public setAnswer(answer: Answer | null): void {
+    this.#answer = answer;
+  }
+
+  /**
    * @returns {void}
    */
   public resetDefault(): void {
     this.#question = getNewQuestion();
+    this.#answer = getNewAnswer();
   }
 
   /**
@@ -86,10 +95,12 @@ export default class QuestionGateway implements QuestionInterface {
   /**
    *
    * @param {integer} userId user id
+   * @param {integer} questionId user id
    * @returns {AnswerAttributes} answer object, if found
    */
   public async findAnswerByUserId(
-    userId: number | undefined
+    userId: number | undefined,
+    questionId: number | undefined
   ): Promise<AnswerAttributes | null> {
     return this.#answer;
   }

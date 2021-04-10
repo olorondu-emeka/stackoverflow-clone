@@ -34,7 +34,7 @@ function getBadQuestion(): GenericObject {
 
 /**
  *
- * @returns {GenericObject} new answer
+ * @returns {AnswerAttributes} new answer
  */
 function getNewAnswer(): Answer {
   const newAnswer = {
@@ -45,4 +45,16 @@ function getNewAnswer(): Answer {
   return newAnswer;
 }
 
-export { getNewQuestion, getBadQuestion, getNewAnswer };
+/**
+ *
+ * @returns {AnswerAttributes} new answer
+ */
+function getBadAnswer(): GenericObject {
+  const badAnswer = {
+    questionId: 1,
+    userId: 1
+  };
+  return badAnswer;
+}
+
+export { getNewQuestion, getBadQuestion, getNewAnswer, getBadAnswer };

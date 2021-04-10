@@ -37,7 +37,8 @@ export default class AnswerQuestion {
         return ErrorResponse.notFound('question does not exist');
 
       const possibleAnswer = await this.#questionInterface.findAnswerByUserId(
-        answerDetails.userId
+        answerDetails.userId,
+        possibleQuestion.id
       );
       if (possibleAnswer)
         return ErrorResponse.conflict('you have already answered this qestion');
