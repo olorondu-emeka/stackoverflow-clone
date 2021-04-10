@@ -37,8 +37,7 @@ export default class UserController {
         let { user } = data.data;
         //@ts-ignore
         user = user.dataValues;
-        //@ts-ignore
-        delete user.id;
+
         //@ts-ignore
         delete user.password;
 

@@ -18,6 +18,7 @@ const newQuestion = getNewQuestion();
 const badQuestion = getBadQuestion();
 const testToken = generateToken({ id: 0 });
 let registeredUserToken = '';
+let userId: number;
 
 describe('Integration Test -- Question', () => {
   afterAll(async () => {
@@ -37,10 +38,19 @@ describe('Integration Test -- Question', () => {
     expect(response.body.status).toEqual('error');
   });
 
+  it('should successfully register new user', async () => {
+    const response = await request(app).post('/api/v1/users').send(newUser);
+    registeredUserToken = response.body.data.token;
+    userId = response.body.data.user.id;
+
+    expect(response.status).toEqual(201);
+    expect(response.body.status).toEqual('success');
+  });
+
   it('should throw an unauthorized error for a user without a token', async () => {
     const response = await request(app)
       .post('/api/v1/questions')
-      .send(newQuestion);
+      .send({ ...newQuestion, userId });
 
     expect(response.status).toEqual(401);
     expect(response.body.status).toEqual('error');
@@ -50,25 +60,17 @@ describe('Integration Test -- Question', () => {
     const response = await request(app)
       .post('/api/v1/questions')
       .set('Authorization', testToken)
-      .send(newQuestion);
+      .send({ ...newQuestion, userId });
 
     expect(response.status).toEqual(404);
     expect(response.body.status).toEqual('error');
-  });
-
-  it('should successfully register new user', async () => {
-    const response = await request(app).post('/api/v1/users').send(newUser);
-    registeredUserToken = response.body.data.token;
-
-    expect(response.status).toEqual(201);
-    expect(response.body.status).toEqual('success');
   });
 
   it('should record a new user question successfully', async () => {
     const response = await request(app)
       .post('/api/v1/questions')
       .set('Authorization', registeredUserToken)
-      .send(newQuestion);
+      .send({ ...newQuestion, userId });
 
     expect(response.status).toEqual(201);
     expect(response.body.status).toEqual('success');

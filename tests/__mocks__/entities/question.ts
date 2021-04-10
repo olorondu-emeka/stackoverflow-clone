@@ -1,5 +1,4 @@
 import faker from 'faker';
-import { QuestionAttributes } from '../../../src/data/database/models/Question';
 
 interface GenericObject {
   [index: string]: string | number | boolean;
@@ -9,9 +8,8 @@ interface GenericObject {
  *
  * @returns {QuestionAttributes} Question object
  */
-function getNewQuestion(): QuestionAttributes {
+function getNewQuestion(): GenericObject {
   const newQuestion = {
-    userId: Math.max(1, faker.datatype.number(10)),
     title: faker.lorem.word(),
     body: faker.lorem.sentence(),
     slug: faker.lorem.slug()
@@ -25,7 +23,6 @@ function getNewQuestion(): QuestionAttributes {
  */
 function getBadQuestion(): GenericObject {
   const badQuestion = {
-    userId: faker.datatype.number(10),
     title: faker.lorem.sentence()
   };
 

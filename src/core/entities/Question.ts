@@ -4,4 +4,5 @@ export default interface Question {
   title: string;
   body: string;
   slug: string;
+  votes?: number;
 }
