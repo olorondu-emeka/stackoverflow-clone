@@ -8,6 +8,7 @@ export interface QuestionAttributes {
   title: string;
   body: string;
   slug: string;
+  votes?: number;
 }
 
 type QuestionCreationAttributes = Optional<QuestionAttributes, 'id'>;
@@ -36,6 +37,11 @@ const Question = sequelize.define<QuestionInstance>('Question', {
   slug: {
     allowNull: false,
     type: DataTypes.STRING
+  },
+  votes: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    defaultValue: 0
   }
 });
 

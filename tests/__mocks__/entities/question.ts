@@ -1,5 +1,6 @@
 import faker from 'faker';
-import { QuestionAttributes } from '../../../src/data/database/models/Question';
+import Question from '../../../src/core/entities/Question';
+import Answer from '../../../src/core/entities/Answer';
 
 interface GenericObject {
   [index: string]: string | number | boolean;
@@ -9,9 +10,9 @@ interface GenericObject {
  *
  * @returns {QuestionAttributes} Question object
  */
-function getNewQuestion(): QuestionAttributes {
+function getNewQuestion(): Question {
   const newQuestion = {
-    userId: Math.max(1, faker.datatype.number(10)),
+    userId: 1,
     title: faker.lorem.word(),
     body: faker.lorem.sentence(),
     slug: faker.lorem.slug()
@@ -25,11 +26,35 @@ function getNewQuestion(): QuestionAttributes {
  */
 function getBadQuestion(): GenericObject {
   const badQuestion = {
-    userId: faker.datatype.number(10),
     title: faker.lorem.sentence()
   };
 
   return badQuestion;
 }
 
-export { getNewQuestion, getBadQuestion };
+/**
+ *
+ * @returns {AnswerAttributes} new answer
+ */
+function getNewAnswer(): Answer {
+  const newAnswer = {
+    questionId: 1,
+    userId: 1,
+    body: faker.lorem.sentence()
+  };
+  return newAnswer;
+}
+
+/**
+ *
+ * @returns {AnswerAttributes} new answer
+ */
+function getBadAnswer(): GenericObject {
+  const badAnswer = {
+    questionId: 1,
+    userId: 1
+  };
+  return badAnswer;
+}
+
+export { getNewQuestion, getBadQuestion, getNewAnswer, getBadAnswer };

@@ -4,8 +4,10 @@
 
 import QuestionInterface from '../../../src/data/interfaces/question';
 import Question from '../../../src/core/entities/Question';
-import { getNewQuestion } from '../entities/question';
+import Answer from '../../../src/core/entities/Answer';
+import { getNewQuestion, getNewAnswer } from '../entities/question';
 import { QuestionAttributes } from '../../../src/data/database/models/Question';
+import { AnswerAttributes } from '../../../src/data/database/models/Answer';
 
 export type QuestionArray = Array<QuestionAttributes>;
 
@@ -14,6 +16,7 @@ export type QuestionArray = Array<QuestionAttributes>;
  */
 export default class QuestionGateway implements QuestionInterface {
   #question: Question | null;
+  #answer: Answer | null;
 
   /**
    * @constructor
@@ -21,6 +24,7 @@ export default class QuestionGateway implements QuestionInterface {
    */
   constructor() {
     this.#question = getNewQuestion();
+    this.#answer = getNewAnswer();
   }
 
   /**
@@ -32,10 +36,19 @@ export default class QuestionGateway implements QuestionInterface {
   }
 
   /**
+   * @param {Answer} answer answer to be set
+   * @returns {void}
+   */
+  public setAnswer(answer: Answer | null): void {
+    this.#answer = answer;
+  }
+
+  /**
    * @returns {void}
    */
   public resetDefault(): void {
     this.#question = getNewQuestion();
+    this.#answer = getNewAnswer();
   }
 
   /**
@@ -68,4 +81,34 @@ export default class QuestionGateway implements QuestionInterface {
   ): Promise<QuestionArray> {
     return [getNewQuestion()];
   }
+
+  /**
+   * @param {number} id question id
+   * @returns {QuestionAttributes} question object, if found
+   */
+  public async findExistingQuestionById(
+    id: number
+  ): Promise<QuestionAttributes | null> {
+    return this.#question;
+  }
+
+  /**
+   *
+   * @param {integer} userId user id
+   * @param {integer} questionId user id
+   * @returns {AnswerAttributes} answer object, if found
+   */
+  public async findAnswerByUserId(
+    userId: number | undefined,
+    questionId: number | undefined
+  ): Promise<AnswerAttributes | null> {
+    return this.#answer;
+  }
+
+  /**
+   *
+   * @param {AnswerAttributes} answerDetails answer details
+   * @returns {void}
+   */
+  public async createAnswer(answerDetails: AnswerAttributes): Promise<void> {}
 }

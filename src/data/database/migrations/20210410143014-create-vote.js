@@ -1,6 +1,7 @@
+'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Questions', {
+    await queryInterface.createTable('Votes', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,22 +16,15 @@ module.exports = {
           key: 'id'
         }
       },
-      title: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      body: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      slug: {
-        type: Sequelize.STRING,
-        allowNull: false
+      isValid: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
       },
       votes: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: 0
+        defaultValue: 5
       },
       createdAt: {
         allowNull: false,
@@ -42,7 +36,7 @@ module.exports = {
       }
     });
   },
-  down: async (queryInterface) => {
-    await queryInterface.dropTable('Questions');
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('Votes');
   }
 };

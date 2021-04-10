@@ -1,8 +1,8 @@
-export default interface Question {
+export default interface Answer {
   id?: number;
+  questionId: number;
   userId: number | undefined;
-  title: string;
   body: string;
-  slug: string;
+  accepted?: boolean;
   votes?: number;
 }

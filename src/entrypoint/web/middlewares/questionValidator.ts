@@ -56,14 +56,26 @@ export default class QuestionValidator {
 
   /**
    * Question Validator: check ask question
-   * @param {string} field generic field
    * @returns {array} an array of Check API middlewares
    * @memberof QuestionValidator
    */
   static checkAskQuestion(): Array<ValidationArray> {
     return [
-      QuestionValidator.checkNumericField('userId'),
       QuestionValidator.checkStringField('title'),
+      QuestionValidator.checkStringField('body'),
+      checkForErrors,
+      emptyBody
+    ];
+  }
+
+  /**
+   * Question Validator: check ask question
+   * @returns {array} an array of Check API middlewares
+   * @memberof QuestionValidator
+   */
+  static checkAnswerQuestion(): Array<ValidationArray> {
+    return [
+      QuestionValidator.checkNumericField('questionId'),
       QuestionValidator.checkStringField('body'),
       checkForErrors,
       emptyBody
