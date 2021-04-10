@@ -53,7 +53,7 @@ export default class SessionGateway implements SessionInterface {
    * @returns {json} a session object, if it exists
    */
   public async findExistingSessionByUserId(
-    userId: number
+    userId: number | undefined
   ): Promise<SessionAttributes | null> {
     const possibleSession = await this.#sessionModel.findOne({
       where: {

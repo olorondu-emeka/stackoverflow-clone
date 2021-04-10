@@ -1,9 +1,9 @@
-import UserGateway from '../__mocks__/dataGateways/userGateway';
-import SessionGateway from '../__mocks__/dataGateways/sessionGateway';
-import RegisterUser from '../../src/core/useCases/user/RegisterUser';
-import generateToken from '../../src/entrypoint/web/helpers/generateToken';
-import { getNewUser } from '../__mocks__/entities/user';
-import { FinalResponse } from '../../src/core/definitions/CommonTypes';
+import UserGateway from '../../__mocks__/dataGateways/userGateway';
+import SessionGateway from '../../__mocks__/dataGateways/sessionGateway';
+import RegisterUser from '../../../src/core/useCases/user/RegisterUser';
+import generateToken from '../../../src/entrypoint/web/helpers/generateToken';
+import { getNewUser } from '../../__mocks__/entities/user';
+import { FinalResponse } from '../../../src/core/definitions/CommonTypes';
 
 const newUser = getNewUser();
 

@@ -11,7 +11,7 @@ export default interface SessionInterface {
   ): Promise<SessionAttributes | null>;
 
   findExistingSessionByUserId(
-    userId: number
+    userId: number | undefined
   ): Promise<SessionAttributes | null>;
   updateTokenStatus(token: string): Promise<void>;
 }

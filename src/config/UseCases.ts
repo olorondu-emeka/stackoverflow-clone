@@ -7,9 +7,12 @@ import {
 
 // helper functions
 import generateToken from 'entrypoint/web/helpers/generateToken';
+import passwordHelper from 'entrypoint/web/helpers/passwordHelper';
 
 // use cases classes
 import RegisterUser from 'core/useCases/user/RegisterUser';
+import CreateSession from 'core/useCases/user/CreateSession';
+import DestroySession from 'core/useCases/user/DestroySession';
 import AskQuestion from 'core/useCases/question/AskQuestion';
 
 // use cases instantiations
@@ -18,7 +21,14 @@ const RegisterUserUC = new RegisterUser(
   SessionDataGateway,
   generateToken
 );
+const CreateSessionUC = new CreateSession(
+  UserDataGateway,
+  SessionDataGateway,
+  generateToken,
+  passwordHelper.verify
+);
+const DestroySessionUC = new DestroySession(SessionDataGateway);
 const AskQuestionUC = new AskQuestion(QuestionDataGateway);
 
 // export use cases instantiations
-export { RegisterUserUC, AskQuestionUC };
+export { RegisterUserUC, CreateSessionUC, DestroySessionUC, AskQuestionUC };

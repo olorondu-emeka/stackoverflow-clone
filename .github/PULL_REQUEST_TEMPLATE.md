@@ -4,9 +4,8 @@
 
 #### Description of Task proposed in this pull request?
 
-- (replace me) A description of WHAT changed in the codebase. Additionally add the reasoning if it's complex or abstract.
+Files necessary for this functionality, as reflected in this PR.
 
 #### How should this be manually tested (Quality Assurance)?
 
-- Explain how to manually test this feature. For example if changes were made in
-  the UI or in the API, explain where and if any specific access is needed.
+Run `npm test`

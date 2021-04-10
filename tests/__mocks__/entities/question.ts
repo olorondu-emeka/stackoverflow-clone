@@ -11,9 +11,9 @@ interface GenericObject {
  */
 function getNewQuestion(): QuestionAttributes {
   const newQuestion = {
-    userId: faker.datatype.number(10),
-    title: faker.lorem.sentence(),
-    body: faker.lorem.paragraph(),
+    userId: Math.max(1, faker.datatype.number(10)),
+    title: faker.lorem.word(),
+    body: faker.lorem.sentence(),
     slug: faker.lorem.slug()
   };
 
