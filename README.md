@@ -14,6 +14,12 @@ This is a simple StackOverflow API clone with the following functionalities:
 - Upvote/Downvote a question
 - Subscribe to a question (pending)
 
+## Architecture
+
+This project was built following the [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) by Robert C. Martin, which is summarized in the diagram below:
+
+![clean architecture](./docs/CleanArchitecture.jpg)
+
 ## Assumptions made
 
 The following assumpetions were made during the implementation of this project:
