@@ -18,7 +18,6 @@ const newQuestion = getNewQuestion();
 const badQuestion = getBadQuestion();
 const testToken = generateToken({ id: 0 });
 let registeredUserToken = '';
-let userId: number;
 
 describe('Integration Test -- Question', () => {
   afterAll(async () => {
@@ -41,7 +40,6 @@ describe('Integration Test -- Question', () => {
   it('should successfully register new user', async () => {
     const response = await request(app).post('/api/v1/users').send(newUser);
     registeredUserToken = response.body.data.token;
-    userId = response.body.data.user.id;
 
     expect(response.status).toEqual(201);
     expect(response.body.status).toEqual('success');
@@ -50,7 +48,7 @@ describe('Integration Test -- Question', () => {
   it('should throw an unauthorized error for a user without a token', async () => {
     const response = await request(app)
       .post('/api/v1/questions')
-      .send({ ...newQuestion, userId });
+      .send(newQuestion);
 
     expect(response.status).toEqual(401);
     expect(response.body.status).toEqual('error');
@@ -60,7 +58,7 @@ describe('Integration Test -- Question', () => {
     const response = await request(app)
       .post('/api/v1/questions')
       .set('Authorization', testToken)
-      .send({ ...newQuestion, userId });
+      .send(newQuestion);
 
     expect(response.status).toEqual(404);
     expect(response.body.status).toEqual('error');
@@ -70,7 +68,7 @@ describe('Integration Test -- Question', () => {
     const response = await request(app)
       .post('/api/v1/questions')
       .set('Authorization', registeredUserToken)
-      .send({ ...newQuestion, userId });
+      .send(newQuestion);
 
     expect(response.status).toEqual(201);
     expect(response.body.status).toEqual('success');

@@ -11,4 +11,11 @@ route.post(
   QuestionController.askQuestion
 );
 
+route.post(
+  '/:questionId/answers',
+  QuestionValidator.checkAnswerQuestion(),
+  verifyUserToken,
+  QuestionController.answerQuestion
+);
+
 export default route;
