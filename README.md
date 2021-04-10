@@ -31,7 +31,8 @@ The following assumpetions were made during the implementation of this project:
 
 ## Entity Relationship Diagram
 
- <iframe width="560" height="315" src='https://dbdiagram.io/embed/60633897ecb54e10c33df7e0'> </iframe>
+ ![Stackoverflow Clone](https://user-images.githubusercontent.com/31870266/114285439-2ba10980-9a4f-11eb-9319-f61590bfe9a1.png)
+
 
 ## Documentation
 
