@@ -26,7 +26,7 @@ export default class QuestionGateway implements QuestionInterface {
    * @returns {void}
    */
   constructor() {
-    this.#question = getNewQuestion();
+    this.#question = { ...getNewQuestion(), id: 2 };
     this.#answer = getNewAnswer();
     this.#questionSubscription = {
       userId: 1,
@@ -85,7 +85,7 @@ export default class QuestionGateway implements QuestionInterface {
    * @returns {Question} the created question
    */
   public async create(questionDetails: Question): Promise<Question> {
-    return getNewQuestion();
+    return { ...getNewQuestion(), id: 1 };
   }
 
   /**

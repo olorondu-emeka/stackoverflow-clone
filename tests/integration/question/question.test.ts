@@ -16,13 +16,17 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: `${appPath}/.env` });
 
 const newUser = getNewUser();
+const newUser2 = getNewUser();
+
 const newQuestion = getNewQuestion();
 const badQuestion = getBadQuestion();
 
 const newAnswer = getNewAnswer();
 const badAnswer = getBadAnswer();
 const testToken = generateToken({ id: 0 });
+
 let registeredUserToken = '';
+let registeredUserToken2 = '';
 let questionId: number;
 
 describe('Integration Test -- Ask Question', () => {
@@ -38,6 +42,14 @@ describe('Integration Test -- Ask Question', () => {
   it('should successfully register new user', async () => {
     const response = await request(app).post('/api/v1/users').send(newUser);
     registeredUserToken = response.body.data.token;
+
+    expect(response.status).toEqual(201);
+    expect(response.body.status).toEqual('success');
+  });
+
+  it('should successfully register a second new user', async () => {
+    const response = await request(app).post('/api/v1/users').send(newUser2);
+    registeredUserToken2 = response.body.data.token;
 
     expect(response.status).toEqual(201);
     expect(response.body.status).toEqual('success');
@@ -170,7 +182,7 @@ describe('Integration Test -- SubscribeToQuestion', () => {
   it('should throw an error for incomplete subscription details', async () => {
     const response = await request(app)
       .post(`/api/v1/questions/hello/subscribe`)
-      .set('Authorization', registeredUserToken);
+      .set('Authorization', registeredUserToken2);
 
     expect(response.status).toEqual(400);
     expect(response.body.status).toEqual('error');
@@ -179,7 +191,7 @@ describe('Integration Test -- SubscribeToQuestion', () => {
   it('should successfully subscribe to a question', async () => {
     const response = await request(app)
       .post(`/api/v1/questions/${questionId}/subscribe`)
-      .set('Authorization', registeredUserToken);
+      .set('Authorization', registeredUserToken2);
 
     expect(response.status).toEqual(201);
     expect(response.body.status).toEqual('success');
