@@ -114,6 +114,8 @@ export default class QuestionController {
       const { statusCode, data } = response;
       return generateResponse(res, statusCode, data);
     } catch (error) {
+      console.error('error', error);
+
       const errorResponse = ErrorResponse.serverError(error.message);
       const { statusCode, data } = errorResponse;
       return generateResponse(res, statusCode, data);

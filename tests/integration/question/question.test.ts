@@ -75,14 +75,6 @@ describe('Integration Test -- Ask Question', () => {
 });
 
 describe('Integration Test -- Answer Question', () => {
-  afterAll(async () => {
-    await QuestionModel.destroy({
-      where: {
-        title: newQuestion.title
-      }
-    });
-  });
-
   it('should throw a 400 error for an incomplete answer body', async () => {
     const response = await request(app)
       .post(`/api/v1/questions/${1500}/answers`)
@@ -163,5 +155,42 @@ describe('Integration Test -- Vote Question', () => {
 
     expect(response.status).toEqual(200);
     expect(response.body.status).toEqual('success');
+  });
+});
+
+describe('Integration Test -- SubscribeToQuestion', () => {
+  afterAll(async () => {
+    await QuestionModel.destroy({
+      where: {
+        title: newQuestion.title
+      }
+    });
+  });
+
+  it('should throw an error for incomplete subscription details', async () => {
+    const response = await request(app)
+      .post(`/api/v1/questions/hello/subscribe`)
+      .set('Authorization', registeredUserToken);
+
+    expect(response.status).toEqual(400);
+    expect(response.body.status).toEqual('error');
+  });
+
+  it('should successfully subscribe to a question', async () => {
+    const response = await request(app)
+      .post(`/api/v1/questions/${questionId}/subscribe`)
+      .set('Authorization', registeredUserToken);
+
+    expect(response.status).toEqual(201);
+    expect(response.body.status).toEqual('success');
+  });
+
+  it('should throw an error for a question that a user has already subscribed to', async () => {
+    const response = await request(app)
+      .post(`/api/v1/questions/${questionId}/subscribe`)
+      .set('Authorization', registeredUserToken);
+
+    expect(response.status).toEqual(409);
+    expect(response.body.status).toEqual('error');
   });
 });
