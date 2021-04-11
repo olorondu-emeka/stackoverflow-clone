@@ -25,6 +25,12 @@ route.post(
   QuestionController.voteQuestion
 );
 
+route.get(
+  '/:questionId',
+  QuestionValidator.checkGetQuestion(),
+  QuestionController.getQuestion
+);
+
 // subscriptions & notifications
 route.post(
   '/:questionId/subscribe',

@@ -12,7 +12,8 @@ This is a simple StackOverflow API clone with the following functionalities:
 - User registration
 - Questions (ASk & Answer questions)
 - Upvote/Downvote a question
-- Subscribe to a question (pending)
+- Subscribe to a question
+- Get a question (and its answers)
 
 ## Architecture
 
@@ -27,7 +28,7 @@ The following assumpetions were made during the implementation of this project:
 - Anyone can registr on the platform
 - Only a registered user can ask/answer questions
 - Only a registered user can upvote/downvote a question
-- A registered user that asks a qestion is automatically subscribed to that question.
+- A registered user that asks a qestion is automatically subscribed to receive notifications for that question.
 - A registered user can upvote/downvote question for an unlimited number of times (i.e, no limit)
 
 ## Entity Relationship Diagram
