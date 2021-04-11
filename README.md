@@ -90,6 +90,6 @@ npm test
 ## Built With
 
 - [Express](https://expressjs.com/) - The Node.js web framework used
-- [Typescript](https://www.typescriptlang.org/) the language used
-- [MySQL](https://www.mysql.com/) Relational Database Management System used
+- [Typescript](https://www.typescriptlang.org/) - The language used
+- [MySQL](https://www.mysql.com/) - Relational Database Management System used
 - [NPM](https://www.npmjs.com/) - Dependency Manager for Node.js
