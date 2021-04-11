@@ -2,7 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 
-import QuestionInterface from '../../../src/data/interfaces/question';
+import QuestionInterface, {
+  QuestionNotificationArray
+} from '../../../src/data/interfaces/question';
 import Question from '../../../src/core/entities/Question';
 import Answer from '../../../src/core/entities/Answer';
 import QuestionSubscription from '../../../src/core/entities/QuestionSubscriptions';
@@ -65,8 +67,12 @@ export default class QuestionGateway implements QuestionInterface {
    * @returns {void}
    */
   public resetDefault(): void {
-    this.#question = getNewQuestion();
+    this.#question = { ...getNewQuestion(), id: 1 };
     this.#answer = getNewAnswer();
+    this.#questionSubscription = {
+      userId: 1,
+      questionId: 2
+    };
   }
 
   /**
@@ -74,7 +80,7 @@ export default class QuestionGateway implements QuestionInterface {
    */
   public addVotes(): void {
     if (!this.#question) {
-      this.#question = getNewQuestion();
+      this.#question = { ...getNewQuestion(), id: 1 };
     }
     this.#question.votes = 12;
   }
@@ -173,5 +179,27 @@ export default class QuestionGateway implements QuestionInterface {
     questionId: number
   ): Promise<QuestionSubscriptionAttributes | null> {
     return this.#questionSubscription;
+  }
+
+  /**
+   *
+   * @param {integer} questionId question id
+   * @param {string} notificationMessage notification message
+   * @returns {void}
+   */
+  public async createNotification(
+    questionId: number,
+    notificationMessage: string
+  ): Promise<void> {}
+
+  /**
+   *
+   * @param {integer} questionId questionId
+   * @returns {QuestionNotificationArray} array of question notifications, or empty array, if none
+   */
+  public async getQuestionNotifications(
+    questionId: number
+  ): Promise<QuestionNotificationArray> {
+    return [{ questionId: 2, message: 'any message' }];
   }
 }

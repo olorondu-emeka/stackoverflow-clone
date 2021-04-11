@@ -3,7 +3,8 @@ import UserModel from 'data/database/models/User';
 import SessionModel from 'data/database/models/Session';
 import QuestionModel from 'data/database/models/Question';
 import AnswerModel from 'data/database/models/Answer';
-import QuestionSUbscriptionModel from 'data/database/models/QuestionSubscriptions';
+import QuestionSubscriptionModel from 'data/database/models/QuestionSubscriptions';
+import QuestionNotificationModel from 'data/database/models/QuestionNotifications';
 
 // interface implementation imports
 import UserGateway from 'data/implementations/User';
@@ -16,7 +17,8 @@ const SessionDataGateway = new SessionGateway(SessionModel);
 const QuestionDataGateway = new QuestionGateway(
   QuestionModel,
   AnswerModel,
-  QuestionSUbscriptionModel
+  QuestionSubscriptionModel,
+  QuestionNotificationModel
 );
 
 // exports

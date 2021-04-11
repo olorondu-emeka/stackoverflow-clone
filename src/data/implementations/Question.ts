@@ -1,13 +1,20 @@
 import { Op } from 'sequelize';
 import Question from 'core/entities/Question';
+import QuestionInterface, {
+  QuestionArray,
+  QuestionNotificationArray
+} from 'data/interfaces/question';
+
 import QuestionModel, {
   QuestionAttributes
 } from 'data/database/models/Question';
 import AnswerModel, { AnswerAttributes } from 'data/database/models/Answer';
+
 import QuestionSubscriptionModel, {
   QuestionSubscriptionAttributes
 } from 'data/database/models/QuestionSubscriptions';
-import QuestionInterface, { QuestionArray } from 'data/interfaces/question';
+
+import QuestionNotificationModel from 'data/database/models/QuestionNotifications';
 
 /**
  * @class QuestionGateway
@@ -16,21 +23,25 @@ export default class QuestionGateway implements QuestionInterface {
   #questionModel: typeof QuestionModel;
   #answerModel: typeof AnswerModel;
   #questionSubscriptionModel: typeof QuestionSubscriptionModel;
+  #questionNotificationModel: typeof QuestionNotificationModel;
 
   /**
    * @constructor
    * @param {Model} questionModel the question model
    * @param {Model} answerModel the question model
    * @param {Model} questionSubscriptionModel the question subscription model
+   * @param {Model} questionNotificationModel the question subscription model
    */
   constructor(
     questionModel: typeof QuestionModel,
     answerModel: typeof AnswerModel,
-    questionSubscriptionModel: typeof QuestionSubscriptionModel
+    questionSubscriptionModel: typeof QuestionSubscriptionModel,
+    questionNotificationModel: typeof QuestionNotificationModel
   ) {
     this.#questionModel = questionModel;
     this.#answerModel = answerModel;
     this.#questionSubscriptionModel = questionSubscriptionModel;
+    this.#questionNotificationModel = questionNotificationModel;
   }
 
   /**
@@ -168,5 +179,37 @@ export default class QuestionGateway implements QuestionInterface {
     });
 
     return possibleSubscription;
+  }
+
+  /**
+   *
+   * @param {integer} questionId the question id
+   * @param {integer} notificationMessage the notification message
+   * @returns {void}
+   */
+  public async createNotification(
+    questionId: number,
+    notificationMessage: string
+  ): Promise<void> {
+    await this.#questionNotificationModel.create({
+      questionId,
+      message: notificationMessage
+    });
+  }
+
+  /**
+   *
+   * @param {integer} questionId question id
+   * @returns {QuestionNotificationArray} array of question notifications
+   */
+  public async getQuestionNotifications(
+    questionId: number
+  ): Promise<QuestionNotificationArray> {
+    const notifications = await this.#questionNotificationModel.findAll({
+      where: {
+        questionId
+      }
+    });
+    return notifications;
   }
 }

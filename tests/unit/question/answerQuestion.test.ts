@@ -17,7 +17,11 @@ describe('Unit Test -- Answer Question', () => {
   it('should successfully answer a new question', async () => {
     QuestionDataGateway.setAnswer(null);
 
-    const response: FinalResponse = await AnswerQuestionUC.execute(newAnswer);
+    const response: FinalResponse = await AnswerQuestionUC.execute(
+      newAnswer,
+      'john',
+      'smith'
+    );
     const { statusCode, data } = response;
 
     expect(statusCode).toEqual(201);
@@ -27,7 +31,11 @@ describe('Unit Test -- Answer Question', () => {
   it('should throw a 404 error for a non-existent question', async () => {
     QuestionDataGateway.setQuestion(null);
 
-    const response: FinalResponse = await AnswerQuestionUC.execute(newAnswer);
+    const response: FinalResponse = await AnswerQuestionUC.execute(
+      newAnswer,
+      'john',
+      'smith'
+    );
     const { statusCode, data } = response;
 
     expect(statusCode).toEqual(404);
@@ -35,7 +43,11 @@ describe('Unit Test -- Answer Question', () => {
   });
 
   it('should throw a 409 error for a question that has already been answered', async () => {
-    const response: FinalResponse = await AnswerQuestionUC.execute(newAnswer);
+    const response: FinalResponse = await AnswerQuestionUC.execute(
+      newAnswer,
+      'john',
+      'smith'
+    );
     const { statusCode, data } = response;
 
     expect(statusCode).toEqual(409);

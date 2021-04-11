@@ -171,14 +171,6 @@ describe('Integration Test -- Vote Question', () => {
 });
 
 describe('Integration Test -- SubscribeToQuestion', () => {
-  afterAll(async () => {
-    await QuestionModel.destroy({
-      where: {
-        title: newQuestion.title
-      }
-    });
-  });
-
   it('should throw an error for incomplete subscription details', async () => {
     const response = await request(app)
       .post(`/api/v1/questions/hello/subscribe`)
@@ -204,5 +196,33 @@ describe('Integration Test -- SubscribeToQuestion', () => {
 
     expect(response.status).toEqual(409);
     expect(response.body.status).toEqual('error');
+  });
+});
+
+describe('Integration Test -- GetQuestionNotifications', () => {
+  afterAll(async () => {
+    await QuestionModel.destroy({
+      where: {
+        title: newQuestion.title
+      }
+    });
+  });
+
+  it('should throw an error for incomplete notification details', async () => {
+    const response = await request(app)
+      .get(`/api/v1/questions/hello/notifications`)
+      .set('Authorization', registeredUserToken2);
+
+    expect(response.status).toEqual(400);
+    expect(response.body.status).toEqual('error');
+  });
+
+  it('should succesfully retrieve notifcations for a subscribed question', async () => {
+    const response = await request(app)
+      .get(`/api/v1/questions/${questionId}/notifications`)
+      .set('Authorization', registeredUserToken2);
+
+    expect(response.status).toEqual(200);
+    expect(response.body.status).toEqual('success');
   });
 });

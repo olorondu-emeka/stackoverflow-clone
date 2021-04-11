@@ -1,6 +1,9 @@
 import User from 'core/entities/User';
 import Question from 'core/entities/Question';
-import { QuestionArray } from 'data/interfaces/question';
+import {
+  QuestionArray,
+  QuestionNotificationArray
+} from 'data/interfaces/question';
 
 export interface DataObject {
   [index: string]:
@@ -10,6 +13,7 @@ export interface DataObject {
     | User
     | Question
     | QuestionArray
+    | QuestionNotificationArray
     | null;
 }
 

@@ -115,4 +115,13 @@ export default class QuestionValidator {
   static checkSubscribeToQuestion(): Array<ValidationArray> {
     return [QuestionValidator.checkNumericField('questionId'), checkForErrors];
   }
+
+  /**
+   * Question Validator: check ask question
+   * @returns {array} an array of Check API middlewares
+   * @memberof QuestionValidator
+   */
+  static checkGetQuestionNotifications(): Array<ValidationArray> {
+    return [QuestionValidator.checkNumericField('questionId'), checkForErrors];
+  }
 }
