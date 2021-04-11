@@ -3,8 +3,10 @@ import Question from 'core/entities/Question';
 import { QuestionAttributes } from 'data/database/models/Question';
 import { AnswerAttributes } from 'data/database/models/Answer';
 import { QuestionSubscriptionAttributes } from 'data/database/models/QuestionSubscriptions';
+import { QuestionNotificationAttributes } from 'data/database/models/QuestionNotifications';
 
 export type QuestionArray = Array<QuestionAttributes>;
+export type QuestionNotificationArray = Array<QuestionNotificationAttributes>;
 
 export default interface QuestionInterface {
   create(questionDetails: QuestionAttributes): Promise<Question>;
@@ -34,4 +36,8 @@ export default interface QuestionInterface {
     questionId: number,
     notificationMessage: string
   ): Promise<void>;
+
+  getQuestionNotifications(
+    questionId: number
+  ): Promise<QuestionNotificationArray>;
 }

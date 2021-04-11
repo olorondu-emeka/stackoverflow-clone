@@ -1,6 +1,9 @@
 import { Op } from 'sequelize';
 import Question from 'core/entities/Question';
-import QuestionInterface, { QuestionArray } from 'data/interfaces/question';
+import QuestionInterface, {
+  QuestionArray,
+  QuestionNotificationArray
+} from 'data/interfaces/question';
 
 import QuestionModel, {
   QuestionAttributes
@@ -192,5 +195,21 @@ export default class QuestionGateway implements QuestionInterface {
       questionId,
       message: notificationMessage
     });
+  }
+
+  /**
+   *
+   * @param {integer} questionId question id
+   * @returns {QuestionNotificationArray} array of question notifications
+   */
+  public async getQuestionNotifications(
+    questionId: number
+  ): Promise<QuestionNotificationArray> {
+    const notifications = await this.#questionNotificationModel.findAll({
+      where: {
+        questionId
+      }
+    });
+    return notifications;
   }
 }
