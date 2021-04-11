@@ -99,7 +99,12 @@ export default class QuestionGateway implements QuestionInterface {
     id: number
   ): Promise<QuestionAttributes | null> {
     const possibleQuestion = await this.#questionModel.findOne({
-      where: { id }
+      where: { id },
+      include: [
+        {
+          model: AnswerModel
+        }
+      ]
     });
     return possibleQuestion;
   }

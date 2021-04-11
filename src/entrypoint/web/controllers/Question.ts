@@ -8,7 +8,8 @@ import {
   AnswerQuestionUC,
   VoteQuestionUC,
   SubscribeToQuestionUC,
-  GetQuestionNotificationsUC
+  GetQuestionNotificationsUC,
+  GetQuestionUC
 } from 'config/UseCases';
 
 /**
@@ -146,6 +147,27 @@ export default class QuestionController {
         userId,
         questionId
       );
+
+      const { statusCode, data } = response;
+      return generateResponse(res, statusCode, data);
+    } catch (error) {
+      const errorResponse = ErrorResponse.serverError(error.message);
+      const { statusCode, data } = errorResponse;
+      return generateResponse(res, statusCode, data);
+    }
+  }
+
+  /**
+   * @static
+   * @param {Request} req express request object
+   * @param {Response} res express response object
+   * @returns {json} a json object
+   */
+  static async getQuestion(req: Request, res: Response): Promise<Response> {
+    try {
+      const questionId = parseInt(req.params.questionId);
+
+      const response = await GetQuestionUC.execute(questionId);
       const { statusCode, data } = response;
       return generateResponse(res, statusCode, data);
     } catch (error) {

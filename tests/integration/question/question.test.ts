@@ -226,3 +226,27 @@ describe('Integration Test -- GetQuestionNotifications', () => {
     expect(response.body.status).toEqual('success');
   });
 });
+
+describe('Integration -- GetQuestion', () => {
+  afterAll(async () => {
+    await QuestionModel.destroy({
+      where: {
+        title: newQuestion.title
+      }
+    });
+  });
+
+  it('should throw an error for incomplete notification details', async () => {
+    const response = await request(app).get(`/api/v1/questions/hello`);
+
+    expect(response.status).toEqual(400);
+    expect(response.body.status).toEqual('error');
+  });
+
+  it('should successfully retrieve question and its answers', async () => {
+    const response = await request(app).get(`/api/v1/questions/${questionId}`);
+
+    expect(response.status).toEqual(200);
+    expect(response.body.status).toEqual('success');
+  });
+});
