@@ -25,4 +25,12 @@ route.post(
   QuestionController.voteQuestion
 );
 
+// subscriptions & notifications
+route.post(
+  '/:questionId/subscribe',
+  QuestionValidator.checkSubscribeToQuestion(),
+  verifyUserToken,
+  QuestionController.subscribeToQuestion
+);
+
 export default route;

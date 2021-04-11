@@ -47,6 +47,7 @@ System requirements for this project to work includes:
 
 - Node.js(v8 or higher)
 - Node Package Manager (NPM)
+- Git
 - Typescript globally installed
 - MySQL
 
