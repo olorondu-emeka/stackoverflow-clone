@@ -29,4 +29,9 @@ export default interface QuestionInterface {
     userId: number,
     questionId: number
   ): Promise<QuestionSubscriptionAttributes | null>;
+
+  createNotification(
+    questionId: number,
+    notificationMessage: string
+  ): Promise<void>;
 }

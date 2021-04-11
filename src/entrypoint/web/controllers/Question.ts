@@ -52,15 +52,19 @@ export default class QuestionController {
   static async answerQuestion(req: Request, res: Response): Promise<Response> {
     try {
       //@ts-ignore
-      const userId = req.user.id;
+      const { id: userId, firstName, lastName } = req.user;
       const questionId = parseInt(req.params.questionId);
       const { body } = req.body;
 
-      const response = await AnswerQuestionUC.execute({
-        userId,
-        questionId,
-        body
-      });
+      const response = await AnswerQuestionUC.execute(
+        {
+          userId,
+          questionId,
+          body
+        },
+        firstName,
+        lastName
+      );
 
       const { statusCode, data } = response;
       return generateResponse(res, statusCode, data);

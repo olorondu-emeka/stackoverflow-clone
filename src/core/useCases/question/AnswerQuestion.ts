@@ -24,10 +24,14 @@ export default class AnswerQuestion {
   /**
    *
    * @param {AnswerAttributes} answerDetails answer details
+   * @param {string} firstName user first name
+   * @param {string} lastName user last name
    * @returns {FinalResponse} final response
    */
   public async execute(
-    answerDetails: AnswerAttributes
+    answerDetails: AnswerAttributes,
+    firstName: string,
+    lastName: string
   ): Promise<FinalResponse> {
     try {
       const possibleQuestion = await this.#questionInterface.findExistingQuestionById(
@@ -36,6 +40,9 @@ export default class AnswerQuestion {
       if (!possibleQuestion)
         return ErrorResponse.notFound('question does not exist');
 
+      if (!possibleQuestion.id)
+        return ErrorResponse.serverError('possibleQuestion.id does not exist!');
+
       const possibleAnswer = await this.#questionInterface.findAnswerByUserId(
         answerDetails.userId,
         possibleQuestion.id
@@ -43,7 +50,14 @@ export default class AnswerQuestion {
       if (possibleAnswer)
         return ErrorResponse.conflict('you have already answered this qestion');
 
+      // upgrade suggestion: use a database transaction for createAnswer and createNotification operations
       await this.#questionInterface.createAnswer(answerDetails);
+
+      const notificationMessage = `Question(${possibleQuestion.title}) has just been answered by ${firstName} ${lastName}. Go check it out!`;
+      await this.#questionInterface.createNotification(
+        possibleQuestion.id,
+        notificationMessage
+      );
       return SuccessResponse.created('answer submitted successfully', {});
     } catch (error) {
       throw error;

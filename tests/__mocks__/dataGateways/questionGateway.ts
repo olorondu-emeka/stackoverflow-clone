@@ -65,7 +65,7 @@ export default class QuestionGateway implements QuestionInterface {
    * @returns {void}
    */
   public resetDefault(): void {
-    this.#question = getNewQuestion();
+    this.#question = { ...getNewQuestion(), id: 1 };
     this.#answer = getNewAnswer();
   }
 
@@ -74,7 +74,7 @@ export default class QuestionGateway implements QuestionInterface {
    */
   public addVotes(): void {
     if (!this.#question) {
-      this.#question = getNewQuestion();
+      this.#question = { ...getNewQuestion(), id: 1 };
     }
     this.#question.votes = 12;
   }
@@ -174,4 +174,15 @@ export default class QuestionGateway implements QuestionInterface {
   ): Promise<QuestionSubscriptionAttributes | null> {
     return this.#questionSubscription;
   }
+
+  /**
+   *
+   * @param {integer} questionId question id
+   * @param {string} notificationMessage notification message
+   * @returns {void}
+   */
+  public async createNotification(
+    questionId: number,
+    notificationMessage: string
+  ): Promise<void> {}
 }
