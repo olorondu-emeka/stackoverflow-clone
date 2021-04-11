@@ -33,4 +33,11 @@ route.post(
   QuestionController.subscribeToQuestion
 );
 
+route.get(
+  '/:questionId/notifications',
+  QuestionValidator.checkGetQuestionNotifications(),
+  verifyUserToken,
+  QuestionController.getQuestionNotifications
+);
+
 export default route;

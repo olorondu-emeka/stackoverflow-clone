@@ -17,6 +17,7 @@ import AskQuestion from 'core/useCases/question/AskQuestion';
 import AnswerQuestion from 'core/useCases/question/AnswerQuestion';
 import VoteQuestion from 'core/useCases/question/VoteQuestion';
 import SubscribeToQuestion from 'core/useCases/question/SubscribeToQuestion';
+import GetQuestionNotifications from 'core/useCases/question/GetQuestionNotifications';
 
 // use cases instantiations
 const RegisterUserUC = new RegisterUser(
@@ -35,6 +36,9 @@ const AskQuestionUC = new AskQuestion(QuestionDataGateway);
 const AnswerQuestionUC = new AnswerQuestion(QuestionDataGateway);
 const VoteQuestionUC = new VoteQuestion(QuestionDataGateway);
 const SubscribeToQuestionUC = new SubscribeToQuestion(QuestionDataGateway);
+const GetQuestionNotificationsUC = new GetQuestionNotifications(
+  QuestionDataGateway
+);
 
 // export use cases instantiations
 export {
@@ -44,5 +48,6 @@ export {
   AskQuestionUC,
   AnswerQuestionUC,
   VoteQuestionUC,
-  SubscribeToQuestionUC
+  SubscribeToQuestionUC,
+  GetQuestionNotificationsUC
 };
