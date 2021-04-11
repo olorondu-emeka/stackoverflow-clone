@@ -102,7 +102,7 @@ export default class QuestionGateway implements QuestionInterface {
       where: { id },
       include: [
         {
-          model: QuestionModel
+          model: AnswerModel
         }
       ]
     });
