@@ -200,14 +200,6 @@ describe('Integration Test -- SubscribeToQuestion', () => {
 });
 
 describe('Integration Test -- GetQuestionNotifications', () => {
-  afterAll(async () => {
-    await QuestionModel.destroy({
-      where: {
-        title: newQuestion.title
-      }
-    });
-  });
-
   it('should throw an error for incomplete notification details', async () => {
     const response = await request(app)
       .get(`/api/v1/questions/hello/notifications`)
