@@ -84,6 +84,9 @@ Run the following command
 npm test
 ```
 
+![total tests](./docs/total_tests.png)
+![test coverage](./docs/test_coverage.png)
+
 ## Built With
 
 - [Express](https://expressjs.com/) - The Node.js web framework used
