@@ -27,12 +27,12 @@ The following assumpetions were made during the implementation of this project:
 - Anyone can registr on the platform
 - Only a registered user can ask/answer questions
 - Only a registered user can upvote/downvote a question
+- A registered user that asks a qestion is automatically subscribed to that question.
 - A registered user can upvote/downvote question for an unlimited number of times (i.e, no limit)
 
 ## Entity Relationship Diagram
 
- ![Stackoverflow Clone](https://user-images.githubusercontent.com/31870266/114285439-2ba10980-9a4f-11eb-9319-f61590bfe9a1.png)
-
+![Stackoverflow Clone](https://user-images.githubusercontent.com/31870266/114285439-2ba10980-9a4f-11eb-9319-f61590bfe9a1.png)
 
 ## Documentation
 
@@ -48,6 +48,7 @@ System requirements for this project to work includes:
 
 - Node.js(v8 or higher)
 - Node Package Manager (NPM)
+- Git
 - Typescript globally installed
 - MySQL
 
@@ -64,11 +65,13 @@ npm install
 To run the project on your local machine, follow the steps below:
 
 - Ensure that the MySQL instance on your machine is running.
+- Create a database called **stackoverflow_clone** (or any arbitrary name of your choice)
 - Populate the environment variables listed in the `env.sample` file (contained in the root folder) with the appropriate values (database credentials included, as listed)
 
-Once the steps above have been taken, navigate to the project directory and run the following command on the terminal:
+Once the steps above have been taken, navigate to the project directory and run the following commands on the terminal:
 
 ```bash
+npm run db:migrate
 npm run start:dev
 ```
 

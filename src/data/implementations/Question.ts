@@ -4,6 +4,9 @@ import QuestionModel, {
   QuestionAttributes
 } from 'data/database/models/Question';
 import AnswerModel, { AnswerAttributes } from 'data/database/models/Answer';
+import QuestionSubscriptionModel, {
+  QuestionSubscriptionAttributes
+} from 'data/database/models/QuestionSubscriptions';
 import QuestionInterface, { QuestionArray } from 'data/interfaces/question';
 
 /**
@@ -12,18 +15,22 @@ import QuestionInterface, { QuestionArray } from 'data/interfaces/question';
 export default class QuestionGateway implements QuestionInterface {
   #questionModel: typeof QuestionModel;
   #answerModel: typeof AnswerModel;
+  #questionSubscriptionModel: typeof QuestionSubscriptionModel;
 
   /**
    * @constructor
    * @param {Model} questionModel the question model
    * @param {Model} answerModel the question model
+   * @param {Model} questionSubscriptionModel the question subscription model
    */
   constructor(
     questionModel: typeof QuestionModel,
-    answerModel: typeof AnswerModel
+    answerModel: typeof AnswerModel,
+    questionSubscriptionModel: typeof QuestionSubscriptionModel
   ) {
     this.#questionModel = questionModel;
     this.#answerModel = answerModel;
+    this.#questionSubscriptionModel = questionSubscriptionModel;
   }
 
   /**
@@ -128,5 +135,38 @@ export default class QuestionGateway implements QuestionInterface {
       { votes: totalVotes },
       { where: { id: questionId } }
     );
+  }
+
+  /**
+   *
+   * @param {integer} userId user id
+   * @param {integer} questionId question id
+   * @returns {void}
+   */
+  public async createQuestionSubscription(
+    userId: number,
+    questionId: number
+  ): Promise<void> {
+    await this.#questionSubscriptionModel.create({ userId, questionId });
+  }
+
+  /**
+   *
+   * @param {integer} userId user id
+   * @param {integer} questionId question id
+   * @returns {void}
+   */
+  public async checkExistingSubscription(
+    userId: number,
+    questionId: number
+  ): Promise<QuestionSubscriptionAttributes | null> {
+    const possibleSubscription = await this.#questionSubscriptionModel.findOne({
+      where: {
+        userId,
+        questionId
+      }
+    });
+
+    return possibleSubscription;
   }
 }

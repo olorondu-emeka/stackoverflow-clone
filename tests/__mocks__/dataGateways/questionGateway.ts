@@ -5,9 +5,11 @@
 import QuestionInterface from '../../../src/data/interfaces/question';
 import Question from '../../../src/core/entities/Question';
 import Answer from '../../../src/core/entities/Answer';
+import QuestionSubscription from '../../../src/core/entities/QuestionSubscriptions';
 import { getNewQuestion, getNewAnswer } from '../entities/question';
 import { QuestionAttributes } from '../../../src/data/database/models/Question';
 import { AnswerAttributes } from '../../../src/data/database/models/Answer';
+import { QuestionSubscriptionAttributes } from '../../../src/data/database/models/QuestionSubscriptions';
 
 export type QuestionArray = Array<QuestionAttributes>;
 
@@ -17,14 +19,19 @@ export type QuestionArray = Array<QuestionAttributes>;
 export default class QuestionGateway implements QuestionInterface {
   #question: Question | null;
   #answer: Answer | null;
+  #questionSubscription: QuestionSubscription | null;
 
   /**
    * @constructor
    * @returns {void}
    */
   constructor() {
-    this.#question = getNewQuestion();
+    this.#question = { ...getNewQuestion(), id: 2 };
     this.#answer = getNewAnswer();
+    this.#questionSubscription = {
+      userId: 1,
+      questionId: 2
+    };
   }
 
   /**
@@ -41,6 +48,17 @@ export default class QuestionGateway implements QuestionInterface {
    */
   public setAnswer(answer: Answer | null): void {
     this.#answer = answer;
+  }
+
+  /**
+   *
+   * @param {QuestionSubscription} questionSubscription questionSubscription object
+   * @returns {void}
+   */
+  public setQuestionSubscription(
+    questionSubscription: QuestionSubscription | null
+  ): void {
+    this.#questionSubscription = questionSubscription;
   }
 
   /**
@@ -67,7 +85,7 @@ export default class QuestionGateway implements QuestionInterface {
    * @returns {Question} the created question
    */
   public async create(questionDetails: Question): Promise<Question> {
-    return getNewQuestion();
+    return { ...getNewQuestion(), id: 1 };
   }
 
   /**
@@ -132,4 +150,28 @@ export default class QuestionGateway implements QuestionInterface {
     questionId: number,
     totalVotes: number
   ): Promise<void> {}
+
+  /**
+   *
+   * @param {integer} userId user id
+   * @param {integer} questionId question id
+   * @returns {void}
+   */
+  public async createQuestionSubscription(
+    userId: number,
+    questionId: number
+  ): Promise<void> {}
+
+  /**
+   *
+   * @param {integer} userId user id
+   * @param {integer} questionId question id
+   * @returns {void}
+   */
+  public async checkExistingSubscription(
+    userId: number,
+    questionId: number
+  ): Promise<QuestionSubscriptionAttributes | null> {
+    return this.#questionSubscription;
+  }
 }

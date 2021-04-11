@@ -6,7 +6,8 @@ import generateResponse from 'entrypoint/web/helpers/generateResponse';
 import {
   AskQuestionUC,
   AnswerQuestionUC,
-  VoteQuestionUC
+  VoteQuestionUC,
+  SubscribeToQuestionUC
 } from 'config/UseCases';
 
 /**
@@ -88,6 +89,33 @@ export default class QuestionController {
       const { statusCode, data } = response;
       return generateResponse(res, statusCode, data);
     } catch (error) {
+      const errorResponse = ErrorResponse.serverError(error.message);
+      const { statusCode, data } = errorResponse;
+      return generateResponse(res, statusCode, data);
+    }
+  }
+
+  /**
+   * @static
+   * @param {Request} req express request object
+   * @param {Response} res express response object
+   * @returns {json} a json object
+   */
+  static async subscribeToQuestion(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
+    try {
+      //@ts-ignore
+      const userId = req.user.id;
+      const questionId = parseInt(req.params.questionId);
+
+      const response = await SubscribeToQuestionUC.execute(userId, questionId);
+      const { statusCode, data } = response;
+      return generateResponse(res, statusCode, data);
+    } catch (error) {
+      console.error('error', error);
+
       const errorResponse = ErrorResponse.serverError(error.message);
       const { statusCode, data } = errorResponse;
       return generateResponse(res, statusCode, data);

@@ -26,12 +26,15 @@ export default class AskQuestion {
    * @param {QuestionAttributes} questionDetails details for question to be asked
    * @returns {Question} registered question object
    */
-  public async execute(questionDetails: QuestionAttributes): Promise<FinalResponse> {
+  public async execute(
+    questionDetails: QuestionAttributes
+  ): Promise<FinalResponse> {
     try {
       const possibleQuestion = await this.#questionInterface.findExistingQuestionByTitle(
         questionDetails.title
       );
-      if (possibleQuestion) return ErrorResponse.conflict('question already exists');
+      if (possibleQuestion)
+        return ErrorResponse.conflict('question already exists');
 
       const registeredQuestion = await this.#questionInterface.create(
         questionDetails
@@ -40,6 +43,19 @@ export default class AskQuestion {
       //   questionDetails.title
       // );
 
+      if (!questionDetails.userId)
+        return ErrorResponse.serverError(
+          'questionDetails.userId does not exist!'
+        );
+      if (!registeredQuestion.id)
+        return ErrorResponse.serverError(
+          'registeredQuestion.id does not exist!'
+        );
+
+      await this.#questionInterface.createQuestionSubscription(
+        questionDetails.userId,
+        registeredQuestion.id
+      );
       return SuccessResponse.created('question registered successfully', {
         question: registeredQuestion
       });

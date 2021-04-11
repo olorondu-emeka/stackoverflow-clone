@@ -29,10 +29,20 @@ describe('Unit Test -- Vote Question', () => {
     expect(data).toHaveProperty('status', 'error');
   });
 
-  it('should successfully upvote/downvote a question', async () => {
+  it('should successfully upvote a question', async () => {
     QuestionDataGateway.addVotes();
 
     const response: FinalResponse = await VoteQuestionUC.execute(1, 'upvote');
+    const { statusCode, data } = response;
+
+    expect(statusCode).toEqual(200);
+    expect(data).toHaveProperty('status', 'success');
+  });
+
+  it('should successfully downvote a question', async () => {
+    QuestionDataGateway.addVotes();
+
+    const response: FinalResponse = await VoteQuestionUC.execute(1, 'downvote');
     const { statusCode, data } = response;
 
     expect(statusCode).toEqual(200);
