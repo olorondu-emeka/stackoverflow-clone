@@ -37,7 +37,7 @@ The following assumpetions were made during the implementation of this project:
 
 ## Documentation
 
-- [Postman Docs (in progress)](https://www.getpostman.com/collections/e056dbca4f2f44959df6)
+- [Postman Docs](https://www.getpostman.com/collections/e056dbca4f2f44959df6)
 
 ## Getting Started
 

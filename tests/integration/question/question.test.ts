@@ -245,7 +245,6 @@ describe('Integration -- GetQuestion', () => {
 
   it('should successfully retrieve question and its answers', async () => {
     const response = await request(app).get(`/api/v1/questions/${questionId}`);
-    console.log(response.body.data.question.Answers);
 
     expect(response.status).toEqual(200);
     expect(response.body.status).toEqual('success');
