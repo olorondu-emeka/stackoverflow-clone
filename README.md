@@ -84,8 +84,9 @@ Run the following command
 npm test
 ```
 
-![total tests ](./docs/total_tests.png)
-![test coverage](./docs/test_coverage.png)
+![total tests](./docs/total_tests.PNG)
+
+![test coverage](./docs/test_coverage.PNG)
 
 ## Built With
 
