@@ -18,6 +18,10 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
+app.get('/', (request: Request, response: Response) => {
+  response.status(200).send('Welcome to Stackoverflow Clone');
+});
+
 app.use('/api/v1', routes);
 
 app.use('*', (request, response) => {
