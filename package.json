@@ -7,7 +7,7 @@
     "start": " npm run build && npm run start:prod",
     "start:dev": "nodemon",
     "start:prod": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
-    "build": "npm run lint && npm run clean && tsc",
+    "build": "npm run clean && tsc",
     "clean": "rimraf dist",
     "test": "jest --coverage",
     "coverage": "jest --coverage",
