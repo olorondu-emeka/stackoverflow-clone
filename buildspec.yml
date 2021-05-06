@@ -19,7 +19,7 @@ phases:
   post_build:
     commands:
       - echo "we are in the post build phase"
-      - rm -r node_modules
+      # - rm -r node_modules
 artifacts:
   files:
     - '**/*'
