@@ -21,6 +21,5 @@ phases:
       - echo "we are in the post build phase"
       - rm -r node_modules
 artifacts:
-  type: zip
   files:
     - '**/*'
