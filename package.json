@@ -4,10 +4,10 @@
   "description": "stack overflow REST API clone",
   "main": "index.ts",
   "scripts": {
-    "start": " npm run build && npm run start:prod",
+    "start": "npm run start:prod",
     "start:dev": "nodemon",
     "start:prod": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
-    "build": "npm run clean && npm install typescript && tsc",
+    "build": "npm run clean && tsc",
     "clean": "rm -rf ./dist",
     "test": "jest --coverage",
     "coverage": "jest --coverage",
