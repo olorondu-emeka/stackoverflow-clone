@@ -4,7 +4,7 @@
   "description": "stack overflow REST API clone",
   "main": "index.ts",
   "scripts": {
-    "start": "npm run start:prod",
+    "start": "npm install && npm run start:prod",
     "start:dev": "nodemon",
     "start:prod": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
     "build": "npm run clean && tsc",
